@@ -1,25 +1,31 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
-<h3><div class = "text-center mb-4 p-3 mb-2 bg-dark text-white"> Welcome to the assignment organizer! </div></h3>
-<h6><div class = "text-center mb-4 p-3 mb-2 bg-primary text-white"> Classes 2021-2022 </div></h6>
-
-{% load socialaccount %}
 {% load static %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-<html>
-<body>
-{% if user.is_authenticated %}
-  <p>Welcome, You are logged in as {{ user.username }}</p>
-{% else %}
-  <a href="{% provider_login_url 'google' %}">Login With Google</a>
-{% endif %}
 
-<h3><div class = "text-center mb-4"> <a class="btn btn-primary btn-lg " href="{% url 'organizer:classes' %}" role="button">See All Classes</a> </div></h3>
-</body>
-</html>
+ <div class="header">
+    <div class="header">
+      <h5><a class="active" href="{% url 'organizer:homepage' %}">Home</a></h5>
+
+    </div>
+  </div>
+
+
+<h3><div class = "text-center mb-4 p-3 mb-2 bg-dark text-white"> </div>
+</h3>
+
+
+<p class="text-primary"><h1></h1></p>
+<h5><div class = "text-center mb-4 p-3 mb-2 bg-primary text-white">   <p>Welcome</p> </div>
+</h5>
+
+<ul>
+{% csrf_token %}
+{% for element in classes_list %}
+  <p><a href="{% url 'organizer:detail' element.class_name %}">{{element.class_name}}</a></p>
+{% endfor %}
+</ul>
 
 
 <h5><style>
@@ -37,6 +43,7 @@
    <div class="footer">
        <h6><p>You are logged in as {{ user.username }}</p></h6>
     </div></h5>
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

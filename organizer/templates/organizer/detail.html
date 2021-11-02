@@ -1,0 +1,34 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+<html>
+
+<h1>{{ course.class_name }}</h1>
+
+
+<label for="enrollment" id=enrollment name=enrollment>Total Enrollment: {{course.enrollment}}</label>
+{% csrf_token %}
+
+{% if course.users%}
+    {% for user in course.users.all%}
+        <li>{{user.username}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<br>
+<form action="{% url 'organizer:upload_file' course.class_name%}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<input type="file" name="upload" />
+<br>
+<br>
+<input type="submit" value="Add Notes">
+</form> 
+
+
+
+</html>
+
