@@ -1,0 +1,15 @@
+{% load socialaccount %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+<h3><div class = "text-center mb-4 p-3 mb-2 bg-dark text-white"> Login Page </div></h3>
+<h5><a class="active" href="/myApp/home/">Home</a></h5>
+ <div class = "text-center mb-4">
+     <a href="{% provider_login_url 'google' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Google Log In</a>
+
+    </div>
