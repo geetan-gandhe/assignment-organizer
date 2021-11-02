@@ -19,6 +19,12 @@
 </ul>
 {% endif %}
 
+{% if notes%}
+<a href="{{ notes.url }}">{{ notes.name }}</a>
+<small>({{ notes.size|filesizeformat }}) - {{notes.upload_date}}</small>
+{% endif %}
+
+
 <br>
 <form action="{% url 'organizer:upload_file' course.class_name%}" method="post" enctype="multipart/form-data">
 {% csrf_token %}

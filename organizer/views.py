@@ -56,8 +56,10 @@ def upload_file(request, class_name):
 def upload_file(request, class_name):
     course = Class.objects.get(class_name=class_name)
     context = {
-        'course' : course
+        'course' : course,
+        'notes': course.notes_set.all()
     }
+    print(context)
     if request.method == 'POST':
         form = NotesUploadForm(request.POST, request.FILES)
         form.course = course

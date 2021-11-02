@@ -17,7 +17,7 @@ class Class(models.Model):
 
 class Notes(models.Model):
     file = models.FileField(upload_to='files/')
-    course = models.ForeignKey(Class, on_delete=models.CASCADE) 
+    course = models.ForeignKey(Class, related_name='notes_set', on_delete=models.CASCADE) 
     def __str__(self):
         return f"{self.file.name}"
 
