@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import django_heroku
-import dj_database_url
 import os
 
 
@@ -29,7 +28,7 @@ SECRET_KEY = 'django-insecure-esh8!e2^jmkxiuchnjlc1$&cn^2kag19h4o3qovfbf)_7u1cj6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://organize-assignments.herokuapp.com']
+ALLOWED_HOSTS = ['https://organize-assignments.herokuapp.com', '*']
 
 
 # Application definition
@@ -94,9 +93,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'TEST': {
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
     }
 }
-
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
