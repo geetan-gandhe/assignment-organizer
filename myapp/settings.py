@@ -161,7 +161,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 3
+SITE_ID = 3 #ID is 3 on prod! make sure to change before commits
 
 LOGIN_REDIRECT_URL = '/organizer/home/'
 LOGOUT_REDIRECT_URL = '/organizer/loginPage/'
