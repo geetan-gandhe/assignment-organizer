@@ -44,4 +44,3 @@ jobs:
       run: |
         python manage.py migrate
         python manage.py test
-        continue-on-error: true
