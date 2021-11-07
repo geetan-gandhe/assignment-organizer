@@ -5,14 +5,14 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
-from django.views.generic.edit import BaseFormView
+from django.views.generic.edit import BaseFormView, CreateView
 from django.views.generic import DetailView
 from django.views.generic import View
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render
 
-from organizer.models import Class, Notes
+from organizer.models import Class, Notes, Reviews
 from organizer.forms import NotesUploadForm
 
 
@@ -28,16 +28,18 @@ class ClassListView(generic.ListView):
     context_object_name = 'classes_list'
 
     def get_queryset(self):
-        return Class.objects.all().values('class_name')
+        return Class.objects.all()
 
 class DetailView(View):
     def custom_detail_view(request, class_name):
         #try:
         course = Class.objects.get(class_name=class_name)
         context = {
-            'course' : course,
-            'notes': course.notes_set.all()
+            'course': course,
+            'notes': course.notes_set.all(),
+            'reviews': Reviews.objects.all() #how to get the reviews to display with other info
         }
+
         print(context)
         return render(request, 'organizer/detail.html', context)
 
@@ -59,3 +61,15 @@ def upload_file(request, class_name):
         'notes': this_course.notes_set.all()
     }
     return render(request, 'organizer/detail.html', context)
+
+
+class ReviewListView(CreateView):
+    model = Reviews
+    template_name = 'organizer/reviews.html'
+    context_object_name = 'review_list'
+    success_url = "/organizer/classes"
+    fields = ['class_prof', 'class_name', 'review_text']
+
+    def get_queryset(self):
+        return Reviews.objects.all().values()
+

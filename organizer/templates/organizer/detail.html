@@ -32,7 +32,6 @@
 
 {% endfor %}
 
-
 <br>
 <form enctype='multipart/form-data' action="{% url 'organizer:upload_file' course.class_name%}" method="POST" data-ajax="false">
 {% csrf_token %}
@@ -41,7 +40,17 @@
 </form> 
 
 
-<a href="{% url 'organizer:classes' %}">See All Classes</a>
 
+<a href="{% url 'organizer:classes' %}">See All Classes</a>
+<br><br>
+{% for element in reviews %}
+    {{element.class_name}}:
+    {{element.class_prof}}:
+    {{element.review_text}}
+<br>
+{% endfor %}
+
+<br>
+<a class="btn btn-primary" href="reviews" role="button">Leave a review</a>
 </html>
 

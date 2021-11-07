@@ -16,6 +16,7 @@ urlpatterns = [
     path('classes/<str:class_name>/', views.DetailView.custom_detail_view, name='detail'),
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view(), name='logout'),
-    path('classes/<str:class_name>/upload', views.upload_file, name='upload_file')
+    path('classes/<str:class_name>/reviews', views.ReviewListView.as_view(), name='reviews'),
+    path('classes/<str:class_name>/upload', views.upload_file, name='upload_file'),
     ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
