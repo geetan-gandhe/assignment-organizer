@@ -4,6 +4,7 @@ from django.contrib.auth.views import LogoutView
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
+#from django.conf.urls import patterns, url
 
 from . import views
 
@@ -18,4 +19,5 @@ urlpatterns = [
     path('logout', LogoutView.as_view(), name='logout'),
     path('classes/<str:class_name>/upload', views.upload_file, name='upload_file')
     ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
