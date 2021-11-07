@@ -11,7 +11,7 @@
 
 <label for="enrollment" id=enrollment name=enrollment>Total Enrollment: {{course.enrollment}}</label>
 {% csrf_token %}
-
+<h2>Students</h2>
 {% if course.users%}
     {% for user in course.users.all%}
         <li>{{user.username}}</li>
@@ -19,22 +19,26 @@
 </ul>
 {% endif %}
 
-{% if notes%}
-<a href="{{ notes.url }}">{{ notes.name }}</a>
-<small>({{ notes.size|filesizeformat }}) - {{notes.upload_date}}</small>
-{% endif %}
+
+<h2>Class PDFs</h2>
+
+{% for note in notes%}
+    {% with uploaded_note=note.file %}   
+    <li class="list-group-item">
+    <a href="{{ uploaded_note.url }}">{{ uploaded_note.name }}</a>
+    <small>({{ uploaded_note.size|filesizeformat }})</small>
+    {% endwith %}
+    </li>
+
+{% endfor %}
 
 
 <br>
-<form action="{% url 'organizer:upload_file' course.class_name%}" method="post" enctype="multipart/form-data">
+<form enctype='multipart/form-data' action="{% url 'organizer:upload_file' course.class_name%}" method="POST" data-ajax="false">
 {% csrf_token %}
-<input type="file" name="upload" />
-<br>
-<br>
-<input type="submit" value="Add Notes">
+{{ form }}
+<input type="submit" value="Add Notes"/>
 </form> 
-
-
 
 </html>
 
