@@ -59,3 +59,17 @@ def upload_file(request, class_name):
         'notes': this_course.notes_set.all()
     }
     return render(request, 'organizer/detail.html', context)
+
+
+def join_class(request, class_name):
+    this_course = Class.objects.get(class_name=class_name)
+    if request.method == 'POST':
+        student = request.user
+        this_course.users.add(student)
+        this_course.save()
+
+    context = {
+        'course': this_course,
+        'notes': this_course.notes_set.all()
+    }
+    return render(request, 'organizer/detail.html', context)
