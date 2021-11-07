@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap5'
-    
 ]
 
 STATIC_URL = '/static'
@@ -165,7 +164,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 3 #ID is 3 on prod! make sure to change before commits
+SITE_ID = 4 #ID is 3 on prod! make sure to change before commits
 
 LOGIN_REDIRECT_URL = '/organizer/home/'
 LOGOUT_REDIRECT_URL = '/organizer/loginPage/'
