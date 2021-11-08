@@ -4,6 +4,7 @@ from django.contrib.auth.views import LogoutView
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
+#from django.conf.urls import patterns, url
 
 from . import views
 
@@ -17,6 +18,12 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view(), name='logout'),
     path('classes/<str:class_name>/reviews', views.ReviewListView.as_view(), name='reviews'),
+    path('index',views.index, name='todo'),
     path('classes/<str:class_name>/upload', views.upload_file, name='upload_file'),
-    ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('classes/<str:class_name>/join', views.join_class, name='join_class'),
+    path('classes/<str:class_name>/', views.upload_file, name='upload_file')]
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
 

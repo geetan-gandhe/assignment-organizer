@@ -6,6 +6,9 @@
 
 <html>
 
+{% if user in course.users.all%}
+
+
 <h1>{{ course.class_name }}</h1>
 
 
@@ -38,6 +41,13 @@
 {{ form }}
 <input type="submit" value="Add Notes"/>
 </form> 
+{% else %}
+
+<p>You are not a currently a student in this class.</p>
+<form action="{% url 'organizer:join_class' course.class_name%}" method="post">
+{% csrf_token %}
+<button class="btn btn-primary" type="submit">Join Class</button>
+</form>
 
 
 <h2>Reviews</h2>
@@ -49,8 +59,10 @@
 <br>
 {% endfor %}
 
+{% endif %}
 
-<br>
-<br><br>
-<a href="{% url 'organizer:classes' %}">See All Classes</a>
+<a class="btn btn-primary" role="button" href="{% url 'organizer:classes' %}">See All Classes</a>
 </html>
+
+
+

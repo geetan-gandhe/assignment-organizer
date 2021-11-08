@@ -1,3 +1,4 @@
+{% include 'base.html' %}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
@@ -9,6 +10,7 @@
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
+
 <html>
 <body>
 {% if user.is_authenticated %}
@@ -18,6 +20,9 @@
 {% endif %}
 
 <h3><div class = "text-center mb-4"> <a class="btn btn-primary btn-lg " href="{% url 'organizer:classes' %}" role="button">See All Classes</a> </div></h3>
+
+<h3><div class = "text-center mb-4"> <a class="btn btn-primary btn-lg " href="{% url 'organizer:todo' %}" role="button">Click here for your Assignment Organizer</a> </div></h3>
+
 </body>
 </html>
 
