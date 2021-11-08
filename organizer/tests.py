@@ -4,7 +4,6 @@ from organizer.models import Class,Notes
 from django.core.files import File
 from django.urls import reverse
 from organizer.views import ClassListView
-from mock import MagicMock
 
 class LoginTest(TestCase):
     def setUp(self):
