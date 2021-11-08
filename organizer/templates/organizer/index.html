@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>TodoApp - Django</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+<div django-app="TaskManager">        
+	<div class="container">
+            <div class="card text-white bg-primary mb-3" style="max-width: 75rem;">
+            <div class="card-body">
+                <h1 class="card-title">Assignment and Task Organizer</h1>
+                <p class="card-text">Please add your to do list items below</p>
+            </div>
+            </div>
+            <div class="content">
+            <form action="" method="post">
+            {% csrf_token %} 
+                <div class="inputContainer">
+                <blockquote class="blockquote text-left">
+                    <label for="description">Description      </label>
+                    <input style="margin-left:20px" type="text" id="description" class="taskName" placeholder="Enter your task here" name="description" required>
+                </blockquote>    
+                </div>
+                <div class="inputContainer half last">
+                    <blockquote class="blockquote text-left">
+                    <option class="disabled" value="">Choose a category</option>
+                    <select id="category" class="taskCategory" name="category_select">
+                    {% for category in categories %}
+                        <option class="" value="{{ category.name }}" name="{{ category.name }}">{{ category.name }}</option>
+                    {% endfor %}
+                    </select>
+                    </blockquote> 
+                </div>
+                <div class="inputContainer half last right">
+                    <blockquote class="blockquote text-left">
+                    <label for="dueDate">Due Date</label>
+                    <input style="margin-left:40px" type="date" id="dueDate" class="taskDate" name="date">
+                    </blockquote> 
+                </div>
+
+                <div class="row">
+                    <blockquote class="blockquote text-right">
+                    &nbsp;<button class="btn btn-primary" name="taskAdd" type="submit">Add task</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </blockquote> 
+                </div>
+
+                <div class="card bg-light mb-3" style="max-width: 75rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Your tasks are below</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <blockquote class="blockquote text-right">
+                    <button class="btn btn-primary" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();">Delete Tasks</button>
+                    </blockquote> 
+                </div>
+            
+            
+            <ul  class="taskList">
+            {% for todo in todos %} <!-- django template lang - for loop -->
+                <li class="list-group">
+                    <li class="list-group-item">
+                    <input type="checkbox" class="taskCheckbox" name="checkedbox" id="{{ todo.id }}" value="{{ todo.id }}" >
+                    <div plabel for="{{ todo.id }}"><span class="complete-">{{ todo.title }}</span></label></div>
+                    <div span class="category-{{ todo.category }}">{{ todo.category }}</span></div>
+                    <div strong class="taskDate"><p class="text-light bg-primary">Due Date: {{ todo.due_date }}</p></strong></div>
+                </li>
+                </li>
+            {% endfor %}
+            
+            
+            </ul><!-- taskList -->
+            </form>
+            </div><!-- content -->
+
+ </div><!-- container -->
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>
