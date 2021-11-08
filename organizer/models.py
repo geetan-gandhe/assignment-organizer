@@ -14,6 +14,8 @@ class Class(models.Model):
     def __str__(self):
         return str(self.class_name)
 
+    objects = models.Manager()
+
 
 class Notes(models.Model):
     file = models.FileField(upload_to='media/')
@@ -21,3 +23,4 @@ class Notes(models.Model):
     def __str__(self):
         return f"{self.file.name}"
 
+    objects = models.Manager()
