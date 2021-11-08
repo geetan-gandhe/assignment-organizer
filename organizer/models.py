@@ -14,7 +14,9 @@ class Class(models.Model):
             ordering = ['class_name']
     def __str__(self):
         return str(self.class_name)
+    objects = models.Manager()
 
+      
 class Reviews(models.Model):
     class_Instructor = models.CharField(max_length=100, default="Class Instructor")
     review = models.TextField(max_length=100, default="Great class!")
@@ -28,6 +30,8 @@ class Notes(models.Model):
     course = models.ForeignKey(Class, related_name='notes_set', on_delete=models.CASCADE) 
     def __str__(self):
         return f"{self.file.name}"
+    objects = models.Manager()
+
 
 class NotesUploadForm(forms.ModelForm):
     class Meta:

@@ -1,6 +1,9 @@
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
-
+from organizer.models import Class,Notes
+from django.core.files import File
+from django.urls import reverse
+from organizer.views import ClassListView
 
 class LoginTest(TestCase):
     def setUp(self):
@@ -22,4 +25,25 @@ class LoginTest(TestCase):
         self.assertFalse(user.is_anonymous)
         #c.logout()
         #self.assertTrue(user.is_authenticated)
-        
+
+#test_models
+class ClassTest(TestCase):
+    @classmethod
+    def setUp(cls):
+        Class.objects.create(class_name='CS2110')
+
+    def test_className(self):
+        test_class = Class.objects.get(id=1)
+        class_name_test = test_class.__str__()
+        #print(class_name_test)
+        self.assertEqual(class_name_test,'CS2110')
+
+    def test_max_length(self):
+        test_class = Class.objects.create(class_name='CS2110')
+        max_length = test_class._meta.get_field('class_name').max_length
+        #print(max_length)
+        self.assertEqual(max_length,100)
+
+
+
+
