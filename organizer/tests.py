@@ -5,6 +5,9 @@ from django.core.files import File
 from django.urls import reverse
 from organizer.views import ClassListView
 
+import mock
+
+
 class LoginTest(TestCase):
     def setUp(self):
         User = get_user_model()
@@ -44,6 +47,14 @@ class ClassTest(TestCase):
         #print(max_length)
         self.assertEqual(max_length,100)
 
-
-
+class NoteTest(TestCase):
+    def test_note_create(self):
+        file_mock = mock.MagicMock(spec=File)
+        file_mock.name = 'test.pdf'
+        file_model = Notes(file=file_mock)
+        class_test = Class.objects.create(class_name='BME4995')
+        class_test.save()
+        note = Notes(file=file_model,course=class_test)
+        note_test = note.file.__str__()
+        self.assertEqual(note_test,'test.pdf')
 
