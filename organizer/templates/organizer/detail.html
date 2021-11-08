@@ -50,6 +50,9 @@
 </form>
 
 
+
+{% endif %}
+
 <h2>Reviews</h2>
 
 {% for element in reviews %}
@@ -59,7 +62,7 @@
 <br>
 {% endfor %}
 
-{% endif %}
+<br>
 
 <a class="btn btn-primary" role="button" href="{% url 'organizer:classes' %}">See All Classes</a>
 </html>
