@@ -13,7 +13,8 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render
 
-from organizer.models import Class, NotesUploadForm
+from organizer.models import Class, Notes
+from organizer.forms import NotesUploadForm
 
 
 
@@ -35,40 +36,43 @@ class DetailView(View):
         #try:
         course = Class.objects.get(class_name=class_name)
         context = {
-            'course' : course
+            'course' : course,
+            'notes': course.notes_set.all()
         }
         print(context)
         return render(request, 'organizer/detail.html', context)
-# Create your views here.
 
-""" 
-def upload_file(request, class_name):
-    course = Class.objects.get(class_name=class_name)
-    context = {
-        'course' : course
-    }
-    if request.method == 'POST' and request.FILES['upload']:
-        upload = request.FILES['upload']
-        fs = FileSystemStorage()
-        fs.save(upload.name, upload)
-        return render(request, 'organizer/detail.html', context)
-    return render(request, 'organizer/detail.html', context) """
 
 def upload_file(request, class_name):
-    course = Class.objects.get(class_name=class_name)
-    context = {
-        'course' : course,
-        'notes': course.notes_set.all()
-    }
-    print(context)
+    this_course = Class.objects.get(class_name=class_name)
+    print(request.method)
     if request.method == 'POST':
         form = NotesUploadForm(request.POST, request.FILES)
-        form.course = course
         if form.is_valid():
-            form.save()
-            return HttpResponse('File saved')
+            instance = Notes(file = request.FILES['file'],course=this_course)
+            instance.save()
+            print("file saved")
     else:
         form = NotesUploadForm()
+    context = {
+        'form': form,
+        'course': this_course,
+        'notes': this_course.notes_set.all()
+    }
+    return render(request, 'organizer/detail.html', context)
+
+
+def join_class(request, class_name):
+    this_course = Class.objects.get(class_name=class_name)
+    if request.method == 'POST':
+        student = request.user
+        this_course.users.add(student)
+        this_course.save()
+
+    context = {
+        'course': this_course,
+        'notes': this_course.notes_set.all()
+    }
     return render(request, 'organizer/detail.html', context)
 
 

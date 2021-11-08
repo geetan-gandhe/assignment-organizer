@@ -6,12 +6,15 @@
 
 <html>
 
+{% if user in course.users.all%}
+
+
 <h1>{{ course.class_name }}</h1>
 
 
 <label for="enrollment" id=enrollment name=enrollment>Total Enrollment: {{course.enrollment}}</label>
 {% csrf_token %}
-
+<h2>Students</h2>
 {% if course.users%}
     {% for user in course.users.all%}
         <li>{{user.username}}</li>
@@ -19,22 +22,36 @@
 </ul>
 {% endif %}
 
-{% if notes%}
-<a href="{{ notes.url }}">{{ notes.name }}</a>
-<small>({{ notes.size|filesizeformat }}) - {{notes.upload_date}}</small>
+
+<h2>Class PDFs</h2>
+
+{% for note in notes%}
+    {% with uploaded_note=note.file %}   
+    <li class="list-group-item">
+    <a href="{{ uploaded_note.url }}">{{ uploaded_note.name }}</a>
+    <small>({{ uploaded_note.size|filesizeformat }})</small>
+    {% endwith %}
+    </li>
+
+{% endfor %}
+
+
+<br>
+<form enctype='multipart/form-data' action="{% url 'organizer:upload_file' course.class_name%}" method="POST" data-ajax="false">
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="Add Notes"/>
+</form> 
+{% else %}
+
+<p>You are not a currently a student in this class.</p>
+<form action="{% url 'organizer:join_class' course.class_name%}" method="post">
+{% csrf_token %}
+<button class="btn btn-primary" type="submit">Join Class</button>
+</form>
+
 {% endif %}
 
-
-<br>
-<form action="{% url 'organizer:upload_file' course.class_name%}" method="post" enctype="multipart/form-data">
-{% csrf_token %}
-<input type="file" name="upload" />
-<br>
-<br>
-<input type="submit" value="Add Notes">
-</form> 
-
-
-
+<a class="btn btn-primary" role="button" href="{% url 'organizer:classes' %}">See All Classes</a>
 </html>
 

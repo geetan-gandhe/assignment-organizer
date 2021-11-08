@@ -1,7 +1,9 @@
 from django.contrib import admin
 from . import models
 
+
 from organizer.models import Class, Notes, NotesUploadForm, TodoList, Category
+
 
 # Register your models here.
 admin.site.register(Class)
@@ -15,4 +17,5 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(models.TodoList, TodoListAdmin)
 admin.site.register(models.Category, CategoryAdmin)
+
 
