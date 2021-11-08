@@ -34,10 +34,11 @@ class DetailView(View):
     def custom_detail_view(request, class_name):
         #try:
         course = Class.objects.get(class_name=class_name)
+
         context = {
             'course': course,
             'notes': course.notes_set.all(),
-            'reviews': Reviews.objects.all() #how to get the reviews to display with other info
+            'reviews': Reviews.objects.filter(class_name=class_name),
         }
 
         print(context)
