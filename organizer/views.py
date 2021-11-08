@@ -89,7 +89,7 @@ def index(request): #the index view
 			content = title + " -- " + date + " " + category #content
 			Todo = TodoList(title=title, content=content, due_date=date, category=Category.objects.get(name=category))
 			Todo.save() #saving the todo 
-			return redirect("/") #reloading the page
+			return redirect("/index") #reloading the page
 		
 		if "taskDelete" in request.POST: #checking if there is a request to delete a todo
 			checkedlist = request.POST["checkedbox"] #checked todos to be deleted
