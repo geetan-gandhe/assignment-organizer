@@ -40,17 +40,17 @@
 </form> 
 
 
+<h2>Reviews</h2>
 
-<a href="{% url 'organizer:classes' %}">See All Classes</a>
-<br><br>
 {% for element in reviews %}
-    {{element.class_name}}:
-    {{element.class_prof}}:
-    {{element.review_text}}
+    {{element.class_Instructor}} - 
+    {{element.course}}:
+    {{element.review}}
 <br>
 {% endfor %}
 
-<br>
-<a class="btn btn-primary" href="reviews" role="button">Leave a review</a>
-</html>
 
+<br>
+<br><br>
+<a href="{% url 'organizer:classes' %}">See All Classes</a>
+</html>

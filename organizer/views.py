@@ -38,7 +38,7 @@ class DetailView(View):
         context = {
             'course': course,
             'notes': course.notes_set.all(),
-            'reviews': Reviews.objects.filter(class_name=class_name),
+            'reviews': course.reviews_set.all(),
         }
 
         print(context)
@@ -69,7 +69,7 @@ class ReviewListView(CreateView):
     template_name = 'organizer/reviews.html'
     context_object_name = 'review_list'
     success_url = "/organizer/classes"
-    fields = ['class_prof', 'class_name', 'review_text']
+    fields = ['class_Instructor', 'course', 'review']
 
     def get_queryset(self):
         return Reviews.objects.all().values()
