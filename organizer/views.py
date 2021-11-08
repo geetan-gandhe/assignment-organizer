@@ -6,16 +6,18 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
-from django.views.generic.edit import BaseFormView
+from django.views.generic.edit import BaseFormView, CreateView
 from django.views.generic import DetailView
 from django.views.generic import View
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
-from organizer.models import Class, Notes
+from organizer.models import Class, Notes, Reviews
 from organizer.forms import NotesUploadForm
+from .models import TodoList, Category
 
+import datetime
 
 
 def home(request):
@@ -35,10 +37,13 @@ class DetailView(View):
     def custom_detail_view(request, class_name):
         #try:
         course = Class.objects.get(class_name=class_name)
+
         context = {
-            'course' : course,
-            'notes': course.notes_set.all()
+            'course': course,
+            'notes': course.notes_set.all(),
+            'reviews': course.reviews_set.all(),
         }
+
         print(context)
         return render(request, 'organizer/detail.html', context)
 
@@ -62,6 +67,18 @@ def upload_file(request, class_name):
     return render(request, 'organizer/detail.html', context)
 
 
+
+class ReviewListView(CreateView):
+    model = Reviews
+    template_name = 'organizer/reviews.html'
+    context_object_name = 'review_list'
+    success_url = "/organizer/classes"
+    fields = ['class_Instructor', 'course', 'review']
+
+    def get_queryset(self):
+        return Reviews.objects.all().values()
+
+
 def join_class(request, class_name):
     this_course = Class.objects.get(class_name=class_name)
     if request.method == 'POST':
@@ -77,9 +94,7 @@ def join_class(request, class_name):
 
 
 
-from django.shortcuts import render,redirect
-from .models import TodoList, Category
-import datetime
+
 # Create your views here.
 
 def index(request): #the index view
@@ -102,3 +117,4 @@ def index(request): #the index view
 				todo.delete() #deleting todo
 
 	return render(request, "organizer/index.html", {"todos": todos, "categories":categories})
+

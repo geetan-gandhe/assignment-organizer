@@ -4,10 +4,10 @@ from . import models
 
 from organizer.models import Class, Notes, NotesUploadForm, TodoList, Category
 
-
 # Register your models here.
 admin.site.register(Class)
 admin.site.register(Notes)
+admin.site.register(Reviews)
 
 class TodoListAdmin(admin.ModelAdmin):
     	list_display = ("title", "created", "due_date")

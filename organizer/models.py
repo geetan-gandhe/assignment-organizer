@@ -15,6 +15,13 @@ class Class(models.Model):
     def __str__(self):
         return str(self.class_name)
 
+class Reviews(models.Model):
+    class_Instructor = models.CharField(max_length=100, default="Class Instructor")
+    review = models.TextField(max_length=100, default="Great class!")
+    course = models.ForeignKey(Class, related_name='reviews_set', on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.course)
 
 class Notes(models.Model):
     file = models.FileField(upload_to='media/')
