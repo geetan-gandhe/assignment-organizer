@@ -28,7 +28,7 @@ class ClassListView(generic.ListView):
     context_object_name = 'classes_list'
 
     def get_queryset(self):
-        return Class.objects.all()
+        return Class.objects.all().values('class_name')
 
 class DetailView(View):
     def custom_detail_view(request, class_name):
