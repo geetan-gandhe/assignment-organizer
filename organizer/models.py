@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django import forms
 from django.utils import timezone
+from taggit.managers import TaggableManager
 
 
 class Class(models.Model):
@@ -16,6 +17,7 @@ class Class(models.Model):
     def __str__(self):
         return str(self.class_name)
     objects = models.Manager()
+
 
       
 class Reviews(models.Model):
@@ -32,6 +34,7 @@ class Notes(models.Model):
     def __str__(self):
         return f"{self.file.name}"
     objects = models.Manager()
+    tags = TaggableManager()
 
 
 class NotesUploadForm(forms.ModelForm):

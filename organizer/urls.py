@@ -21,7 +21,8 @@ urlpatterns = [
     path('index',views.index, name='todo'),
     path('profile',views.profile_view, name='profile'),
     path('classes/<str:class_name>/upload', views.upload_file, name='upload_file'),
-    path('classes/<str:class_name>/join', views.join_class, name='join_class')]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('classes/<str:class_name>/join', views.join_class, name='join_class'),
+    path('classes/<str:class_name>/tags/<slug:slug>', views.DetailView.tagged_detail_view, name='tagged')]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 

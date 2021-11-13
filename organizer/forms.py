@@ -5,7 +5,7 @@ class NotesUploadForm(forms.ModelForm):
     file = forms.FileField()
     class Meta:
         model = Notes
-        fields = ('file',)
+        fields = ('file', 'tags')
 
 class CreateNotes(forms.Form):
     file = forms.FileField()

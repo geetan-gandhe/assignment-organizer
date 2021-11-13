@@ -1,11 +1,5 @@
 .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: rgb(70, 70, 70);
-    color: white;
-    text-align: center;
+    height: fit-content;
   }
   
   .navbar .container-fluid>.navbar-header {
@@ -14,10 +8,11 @@
   }
   .navbar .navbar-nav {
     float: left;
-    margin: 5px;
   }
   .nav>li {
     float: left;
   }
 
-  body {background-color:#F1F1EF}
+  .body {
+    background-color:#F1F1EF;
+  }

@@ -10,13 +10,23 @@
 
 <html>
 <body>
+<h3><div class = "text-center mb-4 p-3 mb-2 bg-primary text-white"> Assignment Organizer </div></h3>
+
+
+
+
 {% if user.is_authenticated %}
   <p>Welcome, {{ user.username }}!</p>
-{% endif %}
+
 
 <h3><div class = "text-center mb-4"> <a class="btn btn-primary btn-lg " href="{% url 'organizer:classes' %}" role="button">See All Classes</a> </div></h3>
 
 <h3><div class = "text-center mb-4"> <a class="btn btn-primary btn-lg " href="{% url 'organizer:todo' %}" role="button">Assignment Organizer</a> </div></h3>
+
+{% else %}
+<p>Please login to access assignments and notes.</p>
+{% endif %}
+
 
 </body>
 </html>

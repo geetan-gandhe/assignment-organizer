@@ -1,8 +1,9 @@
 from __future__ import unicode_literals
+from django.contrib.auth.views import redirect_to_login
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
@@ -12,6 +13,8 @@ from django.views.generic import View
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render,redirect
+from taggit.models import Tag
+from django.template import loader
 
 from organizer.models import Class, Notes, Reviews
 from organizer.forms import NotesUploadForm
@@ -37,11 +40,27 @@ class DetailView(View):
     def custom_detail_view(request, class_name):
         #try:
         course = Class.objects.get(class_name=class_name)
-
+        common_tags = Notes.tags.most_common()[:4]
         context = {
             'course': course,
             'notes': course.notes_set.all(),
             'reviews': course.reviews_set.all(),
+            'common_tags': common_tags,
+        }
+
+        print(context)
+        return render(request, 'organizer/detail.html', context)
+    def tagged_detail_view(request, class_name, slug):
+        #try:
+        course = Class.objects.get(class_name=class_name)
+        tag = get_object_or_404(Tag, slug=slug)
+        common_tags = Notes.tags.most_common()[:4]
+        context = {
+            'course': course,
+            'notes': course.notes_set.filter(tags=tag),
+            'reviews': course.reviews_set.all(),
+            'slug': slug,
+            'common_tags': common_tags,
         }
 
         print(context)
@@ -55,13 +74,25 @@ def profile_view(request):
 
 def upload_file(request, class_name):
     this_course = Class.objects.get(class_name=class_name)
-    print(request.method)
+    template = loader.get_template('organizer/detail.html')
     if request.method == 'POST':
         form = NotesUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            instance = Notes(file = request.FILES['file'],course=this_course)
+            #form.save()
+            #instance = Notes(file = request.FILES['file'],course=this_course)
+            #instance.save()
+            #print("file saved")
+            context = {
+                'form': form,
+                'course': this_course,
+                'notes': this_course.notes_set.all()
+            }
+            instance=form.save(commit=False)
+            instance.course=this_course
             instance.save()
-            print("file saved")
+            for tag in form.cleaned_data['tags']:
+                instance.tags.add(tag)
+            return HttpResponseRedirect(reverse('organizer:detail', args=(class_name,)))
     else:
         form = NotesUploadForm()
     context = {
