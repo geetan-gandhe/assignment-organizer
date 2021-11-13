@@ -47,6 +47,11 @@ class DetailView(View):
         print(context)
         return render(request, 'organizer/detail.html', context)
 
+def profile_view(request):
+    context = {
+        "schedule": request.user.students.all()
+    }
+    return render(request, 'organizer/profile.html', context)
 
 def upload_file(request, class_name):
     this_course = Class.objects.get(class_name=class_name)

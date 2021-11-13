@@ -4,11 +4,12 @@ from django.db.models import fields
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django import forms
+from django.utils import timezone
 
 
 class Class(models.Model):
     class_name = models.CharField(max_length=100, default="CS3240")
-    users = models.ManyToManyField(User)
+    users = models.ManyToManyField(User, related_name="students")
     enrollment = models.IntegerField(default=50)
     class Meta:
             ordering = ['class_name']
@@ -38,8 +39,6 @@ class NotesUploadForm(forms.ModelForm):
         model = Notes
         fields = ('file','course',)
 
-from django.db import models
-from django.utils import timezone
 
 # Create your models here.
 class Category(models.Model): # The Category table name that inherits models.Model
