@@ -1,23 +1,24 @@
+{% include 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
 <!DOCTYPE html>
 <html >
 <head>
   <meta charset="UTF-8">
   <title>TodoApp - Django</title>
-  {% load static %}
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'organizer/style.css' %}">
 </head>
 
+
+<h3><div class = "text-center mb-4 p-3 mb-2 bg-primary text-white"> Assignment and Task Organizer</div></h3>
+<h4>Please add your to do list items below.</h4>
 <body>
 <div django-app="TaskManager">        
 	<div class="container">
-            <div class="card text-white bg-primary mb-3" style="max-width: 75rem;">
-            <div class="card-body">
-                <h1 class="card-title">Assignment and Task Organizer</h1>
-                <p class="card-text">Please add your to do list items below</p>
-            </div>
-            </div>
             <div class="content">
             <form action="" method="post">
             {% csrf_token %} 
@@ -57,7 +58,7 @@
                 </div>
                 <div class="row">
                     <blockquote class="blockquote text-right">
-                    <button class="btn btn-primary" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();">Delete Tasks</button>
+                    <button class="btn btn-primary" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();">Complete Task</button>
                     </blockquote> 
                 </div>
             

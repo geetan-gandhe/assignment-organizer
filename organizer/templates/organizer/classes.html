@@ -1,19 +1,14 @@
 {% include 'base.html' %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 {% load static %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
+<link rel="stylesheet" type="text/css" href="{% static 'organizer/style.css' %}">
 
 
-<h3><div class = "text-center mb-4 p-3 mb-2 bg-dark text-white"> </div>
-</h3>
+<h3><div class = "text-center mb-4 p-3 mb-2 bg-primary text-white"> Classes 2021-2022 </div></h3>
 
-
-<p class="text-primary"><h1></h1></p>
-<h5><div class = "text-center mb-4 p-3 mb-2 bg-primary text-white">   <p>Classes 2021-2022</p> </div>
-</h5>
 
 <ul>
 {% csrf_token %}
@@ -24,25 +19,3 @@
 
 <a class="btn btn-primary" href="{% url 'organizer:reviews' %}" role="button">Leave a review for a class</a>
 
-
-
-<h5><style>
-    .footer {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      background-color: rgb(70, 70, 70);
-      color: white;
-      text-align: center;
-    }
-    </style>
-
-   <div class="footer">
-       <h6><p>You are logged in as {{ user.username }}</p></h6>
-    </div></h5>
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
