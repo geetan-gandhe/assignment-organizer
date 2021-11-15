@@ -102,4 +102,4 @@ def index(request): #the index view
 def demo(request):
     results = test_calendar()
     context = {"results": results}
-    return render(request, 'demo.html', context)
+    return render(request, 'organizer/demo.html', context)
