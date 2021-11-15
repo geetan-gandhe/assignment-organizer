@@ -24,9 +24,14 @@ import datetime
 
 
 def home(request):
-    context = {
+    if request.user.is_authenticated:
+        context = {
         "schedule": request.user.students.all()
-    }
+        }
+        return render(request, 'organizer/home.html', context)
+    else:
+        context = {
+        }
     return render(request, 'organizer/home.html', context)
 
 def loginPage(request):
