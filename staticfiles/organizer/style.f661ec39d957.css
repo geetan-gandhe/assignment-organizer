@@ -1,0 +1,18 @@
+.footer {
+    height: fit-content;
+  }
+  
+  .navbar .container-fluid>.navbar-header {
+    float: left;
+    margin-right: 10px;
+  }
+  .navbar .navbar-nav {
+    float: left;
+  }
+  .nav>li {
+    float: left;
+  }
+
+  .body {
+    background-color:#F1F1EF;
+  }
