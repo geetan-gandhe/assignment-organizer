@@ -10,13 +10,16 @@ class Class(models.Model):
     class_name = models.CharField(max_length=100, default="CS3240")
     users = models.ManyToManyField(User)
     enrollment = models.IntegerField(default=50)
+
     class Meta:
-            ordering = ['class_name']
+        ordering = ['class_name']
+
     def __str__(self):
         return str(self.class_name)
+
     objects = models.Manager()
 
-      
+
 class Reviews(models.Model):
     class_Instructor = models.CharField(max_length=100, default="Class Instructor")
     review = models.TextField(max_length=100, default="Great class!")
@@ -25,42 +28,48 @@ class Reviews(models.Model):
     def __str__(self):
         return str(self.course)
 
+
 class Notes(models.Model):
     file = models.FileField(upload_to='media/')
-    course = models.ForeignKey(Class, related_name='notes_set', on_delete=models.CASCADE) 
+    course = models.ForeignKey(Class, related_name='notes_set', on_delete=models.CASCADE)
+
     def __str__(self):
         return f"{self.file.name}"
+
     objects = models.Manager()
 
 
 class NotesUploadForm(forms.ModelForm):
     class Meta:
         model = Notes
-        fields = ('file','course',)
+        fields = ('file', 'course',)
+
 
 from django.db import models
 from django.utils import timezone
 
+
 # Create your models here.
-class Category(models.Model): # The Category table name that inherits models.Model
-	name = models.CharField(max_length=100) #Like a varchar
+class Category(models.Model):  # The Category table name that inherits models.Model
+    name = models.CharField(max_length=100)  # Like a varchar
 
-	class Meta:
-		verbose_name = ("Category")
-		verbose_name_plural = ("Categories")
+    class Meta:
+        verbose_name = ("Category")
+        verbose_name_plural = ("Categories")
 
-	def __str__(self):
-		return self.name #name to be shown when called
+    def __str__(self):
+        return self.name  # name to be shown when called
 
-class TodoList(models.Model): #Todolist able name that inherits models.Model
-	title = models.CharField(max_length=250) # a varchar
-	content = models.TextField(blank=True) # a text field 
-	created = models.DateField(default=timezone.now().strftime("%Y-%m-%d")) # a date
-	due_date = models.DateField(default=timezone.now().strftime("%Y-%m-%d")) # a date
-	category = models.ForeignKey(Category,  on_delete=models.PROTECT, default="general") # a foreignkey
 
-	class Meta:
-		ordering = ["-created"] #ordering by the created field
+class TodoList(models.Model):  # Todolist able name that inherits models.Model
+    title = models.CharField(max_length=250)  # a varchar
+    content = models.TextField(blank=True)  # a text field
+    created = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))  # a date
+    due_date = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))  # a date
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, default="general")  # a foreignkey
 
-	def __str__(self):
-		return self.title #name to be shown when called
+    class Meta:
+        ordering = ["-created"]  # ordering by the created field
+
+    def __str__(self):
+        return self.title  # name to be shown when called
