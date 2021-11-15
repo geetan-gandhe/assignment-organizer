@@ -19,7 +19,7 @@
 <p class="ml-2 pl-2">Classes You're Enrolled In:</p>
 {% for course in schedule%} 
     <li class="list-group-item">
-      <a href="{% url 'organizer:detail' course %}">{{ course}}</a>
+      <a class="btn btn-danger btn-lg" role="button" href="{% url 'organizer:detail' course %}">{{course}}</a>
     </li>
 {% endfor %}
 </div>

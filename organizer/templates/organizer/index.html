@@ -15,7 +15,7 @@
 
 
 <h3><div class = "text-center mb-4 p-3 mb-2 bg-primary text-white"> Assignment and Task Organizer</div></h3>
-<h4>Please add your to do list items below.</h4>
+<h4><p class = "text-left ml-5">Please add your to-do list items below.</p></h4>
 <body>
 <div django-app="TaskManager">        
 	<div class="container">
@@ -24,13 +24,13 @@
             {% csrf_token %} 
                 <div class="inputContainer">
                 <blockquote class="blockquote text-left">
-                    <label for="description">Description      </label>
+                    <label for="description">Description:      </label>
                     <input style="margin-left:20px" type="text" id="description" class="taskName" placeholder="Enter your task here" name="description" required>
                 </blockquote>    
                 </div>
                 <div class="inputContainer half last">
                     <blockquote class="blockquote text-left">
-                    <option class="disabled" value="">Choose a category</option>
+                    <option class="disabled" value="">Choose a category:</option>
                     <select id="category" class="taskCategory" name="category_select">
                     {% for category in categories %}
                         <option class="" value="{{ category.name }}" name="{{ category.name }}">{{ category.name }}</option>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="inputContainer half last right">
                     <blockquote class="blockquote text-left">
-                    <label for="dueDate">Due Date</label>
+                    <label for="dueDate">Due Date:</label>
                     <input style="margin-left:40px" type="date" id="dueDate" class="taskDate" name="date">
                     </blockquote> 
                 </div>
@@ -53,7 +53,7 @@
 
                 <div class="card bg-light mb-3" style="max-width: 75rem;">
                 <div class="card-body">
-                    <h5 class="card-title">Your tasks are below</h5>
+                    <h5 class="card-title">Your tasks are below:</h5>
                     </div>
                 </div>
                 <div class="row">
@@ -82,6 +82,14 @@
 
  </div><!-- container -->
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</br>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>

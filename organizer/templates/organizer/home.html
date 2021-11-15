@@ -16,12 +16,33 @@
 
 
 {% if user.is_authenticated %}
-  <p>Welcome, {{ user.username }}!</p>
+  <p class="text-center ml-2 pl-2">Welcome, {{ user.username }}!</p>
+
+<h3 class="ml-2 pl-2">Classes You're Enrolled In:</h3>
+  {% for course in schedule%} 
+      <li class="list-group-item">
+        <a class="btn btn-danger btn-lg" role="button" href="{% url 'organizer:detail' course %}">{{course}}</a>
+      </li>
+  {% endfor %}
+
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 
 
 <h3><div class = "text-center mb-4"> <a class="btn btn-primary btn-lg " href="{% url 'organizer:classes' %}" role="button">See All Classes</a> </div></h3>
 
 <h3><div class = "text-center mb-4"> <a class="btn btn-primary btn-lg " href="{% url 'organizer:todo' %}" role="button">Assignment Organizer</a> </div></h3>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 
 {% else %}
 <p>Please login to access assignments and notes.</p>

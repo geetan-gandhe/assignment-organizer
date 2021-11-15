@@ -24,7 +24,10 @@ import datetime
 
 
 def home(request):
-    return render(request, 'organizer/home.html')
+    context = {
+        "schedule": request.user.students.all()
+    }
+    return render(request, 'organizer/home.html', context)
 
 def loginPage(request):
     return render(request, 'organizer/loginPage.html')
