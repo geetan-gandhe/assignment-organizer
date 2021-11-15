@@ -10,6 +10,7 @@ from . import views
 app_name = 'organizer'
 
 urlpatterns = [
+    path('demo/', views.demo, name='demo'),
     path('classes', views.ClassListView.as_view(), name='classes'),
     path('', views.loginPage, name='index'),
     path('home/', views.home, name='homepage'),

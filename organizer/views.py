@@ -15,7 +15,7 @@ from django.shortcuts import render
 
 from organizer.models import Class, NotesUploadForm
 
-
+from .calendar_API import test_calendar
 
 def home(request):
     return render(request, 'organizer/home.html')
@@ -98,3 +98,8 @@ def index(request): #the index view
 				todo.delete() #deleting todo
 
 	return render(request, "organizer/index.html", {"todos": todos, "categories":categories})
+
+def demo(request):
+    results = test_calendar()
+    context = {"results": results}
+    return render(request, 'demo.html', context)
