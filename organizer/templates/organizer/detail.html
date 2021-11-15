@@ -1,11 +1,11 @@
+{% include 'base.html' %}
 {% load static %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-
-
 <html>
-
+<body>
+<link rel="stylesheet" type="text/css" href="{% static 'organizer/style.css' %}">
 {% if user in course.users.all%}
 
 
@@ -22,23 +22,35 @@
 </ul>
 {% endif %}
 
-
+{% if slug%}
+<h2>Class PDFs: <div class="mr-1 badge badge-info"> {{slug}}</div></h2>
+{% else %}
 <h2>Class PDFs</h2>
+{% endif %}
 
+<p>Common Tags: 
+    {% for mt in common_tags %}
+        <a href="{% url 'organizer:tagged' course.class_name mt.slug %}" class="badge badge-success">{{mt}}</a>
+    {% endfor %}
+</p>
+<div class="overflow-auto">
 {% for note in notes%}
     {% with uploaded_note=note.file %}   
     <li class="list-group-item">
     <a href="{{ uploaded_note.url }}">{{ uploaded_note.name }}</a>
     <small>({{ uploaded_note.size|filesizeformat }})</small>
+    {% for tag in note.tags.all %}
+    <a href="{% url 'organizer:tagged' course.class_name tag.slug %}" class="mr-1 badge badge-info">{{tag}} </a>
+    {% endfor %}
     {% endwith %}
     </li>
 
 {% endfor %}
-
+</div>
 <br>
 <form enctype='multipart/form-data' action="{% url 'organizer:upload_file' course.class_name%}" method="POST" data-ajax="false">
 {% csrf_token %}
-{{ form }}
+{{ form.as_p }}
 <input type="submit" value="Add Notes"/>
 </form> 
 {% else %}
@@ -65,6 +77,15 @@
 <br>
 
 <a class="btn btn-primary" role="button" href="{% url 'organizer:classes' %}">See All Classes</a>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
 </html>
 
 

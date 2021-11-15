@@ -24,7 +24,6 @@ urlpatterns = [
     path('organizer/', include('organizer.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('logout', LogoutView.as_view()), 
 ]
 
 

@@ -30,7 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['https://organize-assignments.herokuapp.com', '*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
