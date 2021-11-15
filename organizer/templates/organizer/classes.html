@@ -13,9 +13,16 @@
 <ul>
 {% csrf_token %}
 {% for element in classes_list %}
-  <p><a href="{% url 'organizer:detail' element.class_name %}">{{element.class_name}}</a></p>
+  <a class="btn btn-danger btn-lg" role="button" href="{% url 'organizer:detail' element.class_name %}">{{element.class_name}}</a>
 {% endfor %}
 </ul>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-<a class="btn btn-primary" href="{% url 'organizer:reviews' %}" role="button">Leave a review for a class</a>
-
+<div class="col text-center">
+<a class="btn btn-secondary btn-lg btn-bloc" href="{% url 'organizer:reviews' %}" role="button">Leave a review for a class</a>
+</div>
