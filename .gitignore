@@ -6,6 +6,9 @@ __pycache__
 db.sqlite3
 media
 
+# Google
+google-credentials.json
+
 # Backup files # 
 *.bak 
 
@@ -77,6 +80,7 @@ celerybeat-schedule.*
 
 # Environments 
 .env 
+organizer/.env
 .venv 
 env/* 
 venv/
