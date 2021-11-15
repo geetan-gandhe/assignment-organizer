@@ -84,7 +84,7 @@ env/lib
 ENV/ 
 env.bak/ 
 venv.bak/ 
-
+staticfiles/admin/
 # mkdocs documentation 
 /site 
 
