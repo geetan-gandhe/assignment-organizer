@@ -33,7 +33,7 @@
                     <option class="disabled" value="">Choose a category:</option>
                     <select id="category" class="taskCategory" name="category_select">
                     {% for category in categories %}
-                        <option class="" value="{{ category.name }}" name="{{ category.name }}">{{ category.name }}</option>
+                        <option class="" value="{{ category.name }}" name="{{ category.name }}" required>{{ category.name }}</option>
                     {% endfor %}
                     </select>
                     </blockquote> 
@@ -41,7 +41,7 @@
                 <div class="inputContainer half last right">
                     <blockquote class="blockquote text-left">
                     <label for="dueDate">Due Date:</label>
-                    <input style="margin-left:40px" type="date" id="dueDate" class="taskDate" name="date">
+                    <input style="margin-left:40px" type="date" id="dueDate" class="taskDate" name="date" required>
                     </blockquote> 
                 </div>
 
