@@ -1,0 +1,25 @@
+{% include 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'organizer/style.css' %}">
+<h3><div class = "text-center mb-4 p-3 mb-2 bg-primary text-white"> Student Profile</div></h3>
+
+<dl class="row ml-2 pl-2">
+    <dt class="col-sm-3 ml-2 pl-2">  <i class="bi bi-file-person"></i> Username</dt>
+    <dd class="col-sm-9 ml-2 pl-2">{{ user.username }} </dd>
+    <dt class="col-sm-3 ml-2 pl-2"> <i class="bi bi-envelope-fill"></i> Email</dt>
+    <dd class="col-sm-9 ml-2 pl-2">
+      <p>{{ user.email}} </p>
+    </dd>
+</dl>
+
+<p class="ml-2 pl-2">Classes You're Enrolled In:</p>
+{% for course in schedule%} 
+    <li class="list-group-item">
+      <a class="btn btn-danger btn-lg" role="button" href="{% url 'organizer:detail' course %}">{{course}}</a>
+    </li>
+{% endfor %}
+</div>

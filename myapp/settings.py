@@ -30,7 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['https://organize-assignments.herokuapp.com', '*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap5'
+    'bootstrap5',
+    'taggit',
 ]
 
 STATIC_URL = '/static'
@@ -139,6 +139,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_TMP = os.path.join(BASE_DIR, 'static')
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -167,7 +168,7 @@ SOCIALACCOUNT_PROVIDERS = {
 SITE_ID = 3 #ID is 3 on prod! make sure to change before commits (4 for Chenelle's local)
 
 LOGIN_REDIRECT_URL = '/organizer/home/'
-LOGOUT_REDIRECT_URL = '/organizer/loginPage/'
+LOGOUT_REDIRECT_URL = '/organizer/home/'
 
 try:
     if 'HEROKU' in os.environ:
