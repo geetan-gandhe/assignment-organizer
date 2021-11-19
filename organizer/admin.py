@@ -2,12 +2,13 @@ from django.contrib import admin
 from . import models
 
 
-from organizer.models import Class, Notes, NotesUploadForm, TodoList, Category, Reviews
+from organizer.models import Class, Notes, NotesUploadForm, TodoList, Category, Reviews, Event
 
 # Register your models here.
 admin.site.register(Class)
 admin.site.register(Notes)
 admin.site.register(Reviews)
+admin.site.register(Event)
 
 class TodoListAdmin(admin.ModelAdmin):
     	list_display = ("title", "created", "due_date")

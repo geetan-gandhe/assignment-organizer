@@ -4,13 +4,15 @@ from django.contrib.auth.views import LogoutView
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
-#from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from . import views
 
 app_name = 'organizer'
 
 urlpatterns = [
+    url(r'^index2/$', views.index, name='index'),
+    url(r'^calendar/$', views.CalendarView.as_view(), name='calendar'),
     path('classes', views.ClassListView.as_view(), name='classes'),
     path('', views.loginPage, name='index'),
     path('home/', views.home, name='homepage'),

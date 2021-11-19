@@ -20,6 +20,11 @@ from organizer.models import Class, Notes, Reviews
 from organizer.forms import NotesUploadForm
 from .models import TodoList, Category
 
+from datetime import datetime
+from django.utils.safestring import mark_safe
+
+from .models import *
+from .utils import Calendar
 import datetime
 
 
@@ -162,3 +167,29 @@ def index(request): #the index view
 
 	return render(request, "organizer/index.html", {"todos": todos, "categories":categories})
 
+def index2(request):
+    return HttpResponse('hello')
+
+class CalendarView(generic.ListView):
+    model = Event
+    template_name = 'organizer/calendar.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # use today's date for the calendar
+        d = get_date(self.request.GET.get('day', None))
+
+        # Instantiate our calendar class with today's year and date
+        cal = Calendar(d.year, d.month)
+
+        # Call the formatmonth method, which returns our calendar as a table
+        html_cal = cal.formatmonth(withyear=True)
+        context['calendar'] = mark_safe(html_cal)
+        return context
+
+def get_date(req_day):
+    if req_day:
+        year, month = (int(x) for x in req_day.split('-'))
+        return date(year, month, day=1)
+    return datetime.datetime.today()
