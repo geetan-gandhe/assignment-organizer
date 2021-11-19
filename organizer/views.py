@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from calendar import calendar
 from django.contrib.auth.views import redirect_to_login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -20,7 +21,7 @@ from organizer.models import Class, Notes, Reviews
 from organizer.forms import NotesUploadForm
 from .models import TodoList, Category
 
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from django.utils.safestring import mark_safe
 
 from .models import *
@@ -183,6 +184,9 @@ class CalendarView(generic.ListView):
         # Call the formatmonth method, which returns our calendar as a table
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
+        d = get_date(self.request.GET.get('month', None))
+        context['prev_month'] = prev_month(d)
+        context['next_month'] = next_month(d)
         return context
 
 def get_date(req_day):
