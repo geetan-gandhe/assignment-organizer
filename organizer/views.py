@@ -26,6 +26,7 @@ from django.utils.safestring import mark_safe
 
 from .models import *
 from .utils import Calendar
+from .forms import EventForm
 import datetime
 import calendar
 
@@ -177,7 +178,7 @@ class CalendarView(generic.ListView):
         context = super().get_context_data(**kwargs)
 
         # use today's date for the calendar
-        d = get_date(self.request.GET.get('day', None))
+        d = get_date(self.request.GET.get('month', None))
 
         # Instantiate our calendar class with today's year and date
         cal = Calendar(d.year, d.month)
@@ -185,14 +186,14 @@ class CalendarView(generic.ListView):
         # Call the formatmonth method, which returns our calendar as a table
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
-        d = get_date(self.request.GET.get('month', None))
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
+        print(context)
         return context
 
-def get_date(req_day):
-    if req_day:
-        year, month = (int(x) for x in req_day.split('-'))
+def get_date(req_month):
+    if req_month:
+        year, month = (int(x) for x in req_month.split('-'))
         return date(year, month, day=1)
     return datetime.datetime.today()
 
