@@ -6,6 +6,10 @@
     height: fit-content;
   }
   
+.btn-danger{
+   background-color:	#FFAA33 !important;
+   border-color: #FFAA33 !important;
+}
 .navbar .container-fluid>.navbar-header {
     float: left;
     margin-right: 10px;
