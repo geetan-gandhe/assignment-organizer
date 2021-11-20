@@ -4,8 +4,6 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
-{% extends 'organizer/base.html' %}
-
 {% block title %}
 Event
 {% endblock %}
@@ -14,6 +12,21 @@ Event
 <div class="clearfix">
   <a class="btn btn-info left" href="{% url 'organizer:calendar' %}"> Calendar </a>
 </div>
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{ field.label }} <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ field.label }} <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
 
 <form method="post">
   {% csrf_token %}

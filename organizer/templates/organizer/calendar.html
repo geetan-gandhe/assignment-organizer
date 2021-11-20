@@ -10,7 +10,7 @@
 <h2 class="text-center">Calendar</h2>
 <a class="btn btn-info left ml-3 mb-2"  href="{% url 'organizer:calendar' %} ? {{prev_month}}"> Previous Month </a>
 <a class="btn btn-info right mr-3 mb-2" href="{% url 'organizer:calendar' %} ? {{next_month}}"> Next Month </a>
-
+<a class="btn btn-info right" href="{% url 'organizer:event_new' %}"> New Event </a>
 {{ calendar }}
 
 {% endblock %}
