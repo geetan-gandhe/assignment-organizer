@@ -4,14 +4,16 @@ from django.contrib.auth.views import LogoutView
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
-
+from django.conf.urls import url
 
 from . import views
 
 app_name = 'organizer'
 
 urlpatterns = [
-    path('calendar/', views.CalendarView.as_view(), name='calendar'),
+    url('calendar/', views.CalendarView.as_view(), name='calendar'),
+    path('event/new/', views.event, name='event_new'),
+    path('event/edit/int:event_id/', views.event, name='event_edit'),
     path('classes', views.ClassListView.as_view(), name='classes'),
     path('', views.loginPage, name='index'),
     path('home/', views.home, name='homepage'),
