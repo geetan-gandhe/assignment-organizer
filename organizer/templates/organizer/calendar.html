@@ -6,6 +6,7 @@
 
 <body>
 {% block content %}
+<br>
 <div class="clearfix">
 	<a class="btn btn-info left"  href="{% url 'organizer:calendar' %} ? {{prev_month}}"> Previous Month </a>
 	<a class="btn btn-info right" href="{% url 'organizer:calendar' %} ? {{next_month}}"> Next Month </a>
