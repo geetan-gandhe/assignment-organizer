@@ -1,3 +1,4 @@
+from django.conf.urls import url
 from django.conf.urls import include
 from django.urls import path
 from django.contrib.auth.views import LogoutView
@@ -25,7 +26,7 @@ urlpatterns = [
     path('profile',views.profile_view, name='profile'),
     path('classes/<str:class_name>/upload', views.upload_file, name='upload_file'),
     path('classes/<str:class_name>/join', views.join_class, name='join_class'),
-    path('classes/<str:class_name>/tags/<slug:slug>', views.DetailView.tagged_detail_view, name='tagged')]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('classes/<str:class_name>/tags/<slug:slug>', views.DetailView.tagged_detail_view, name='tagged')]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 
