@@ -18,7 +18,7 @@ from taggit.models import Tag
 from django.template import loader
 
 from organizer.models import Class, Notes, Reviews
-from organizer.forms import NotesUploadForm
+from organizer.forms import EventForm, NotesUploadForm
 from .models import TodoList, Category
 
 from datetime import date, datetime, timedelta
@@ -216,7 +216,7 @@ def event(request, event_id=None):
         instance = get_object_or_404(Event, pk=event_id)
     else:
         instance = Event()
-    
+
     form = EventForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
         form.save()
