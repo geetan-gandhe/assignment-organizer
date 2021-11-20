@@ -1,16 +1,20 @@
+from django.conf.urls import url
 from django.conf.urls import include
 from django.urls import path
 from django.contrib.auth.views import LogoutView
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
-#from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from . import views
 
 app_name = 'organizer'
 
 urlpatterns = [
+    url('calendar/', views.CalendarView.as_view(), name='calendar'),
+    path('event/new/', views.event, name='event_new'),
+    path('event/edit/(?P<event_id>\d+)/', views.event, name='event_edit'),
     path('classes', views.ClassListView.as_view(), name='classes'),
     path('', views.loginPage, name='index'),
     path('home/', views.home, name='homepage'),
@@ -22,7 +26,7 @@ urlpatterns = [
     path('profile',views.profile_view, name='profile'),
     path('classes/<str:class_name>/upload', views.upload_file, name='upload_file'),
     path('classes/<str:class_name>/join', views.join_class, name='join_class'),
-    path('classes/<str:class_name>/tags/<slug:slug>', views.DetailView.tagged_detail_view, name='tagged')]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('classes/<str:class_name>/tags/<slug:slug>', views.DetailView.tagged_detail_view, name='tagged')]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 
