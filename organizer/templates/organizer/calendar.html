@@ -4,13 +4,14 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
+<body>
 {% block content %}
-
 <div class="clearfix">
-	<a class="btn btn-info left" href="{'% url 'organizer:calendar' %}?{'{ prev_month }}"> Previous Month </a>
-	<a class="btn btn-info right" href="{'% url 'organizer:calendar' %}?{'{ next_month }}"> Next Month </a>
+	<a class="btn btn-info left"  href="{% url 'organizer:calendar' %} ? {{prev_month}}"> Previous Month </a>
+	<a class="btn btn-info right" href="{% url 'organizer:calendar' %} ? {{next_month}}"> Next Month </a>
 </div>
-
 {{ calendar }}
+
 {% endblock %}
+</body>
 
