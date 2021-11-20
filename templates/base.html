@@ -18,13 +18,15 @@
         </li>
         {% block content %}
         {% if user.is_authenticated %}
-            <!-- <a href="{% url 'organizer:classes' %}">Calendar</a> --> <!-- change to organizer:calendar after calendar implementation-->
         <li class="nav-item active"> 
             <a class="nav-link" href="{% url 'organizer:classes' %}">Classes</a>
         </li>
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'organizer:todo' %}">Assignments</a>
         </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'organizer:calendar' %}">Calendar</a>
+      </li>
         </ul>
         <ul class="navbar-nav ms-auto">
             <span class="navbar-text" class="text-white">
