@@ -4,14 +4,12 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
+
 {% block title %}
-Event
+<h3>Add New Event</h3>
 {% endblock %}
 
 {% block content %}
-<div class="clearfix">
-  <a class="btn btn-info left" href="{% url 'organizer:calendar' %}"> Calendar </a>
-</div>
 
 {% if form.errors %}
     {% for field in form %}
@@ -32,7 +30,11 @@ Event
   {% csrf_token %}
   <table class="form form-table">
     {{ form }}
-    <tr><td colspan="2"><button type="submit" class="btn btn-info right"> Submit </button></td></tr>
+    <tr><td colspan="2"><button type="submit" class="btn btn-success"> Submit </button></td></tr>
   </table>
 </form>
 {% endblock %}
+
+<div class="clearfix">
+  <a class="btn btn-info left" href="{% url 'organizer:calendar' %}"> Back to Calendar </a>
+</div>

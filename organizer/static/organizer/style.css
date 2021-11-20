@@ -1,3 +1,7 @@
+.bg-custom {
+  background-color: #FD7880 !important;
+}
+
 .footer {
     height: fit-content;
   }

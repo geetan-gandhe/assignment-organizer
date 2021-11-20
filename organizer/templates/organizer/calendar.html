@@ -4,15 +4,13 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
-<h3><div class = "text-center mb-4 p-3 mb-2 bg-primary text-white"> Calendar</div></h3>
-
+<h3><div class = "text-center mb-4 p-3 mb-2 bg-custom text-white"> Calendar</div></h3>
 <body>
 {% block content %}
-<br>
-<h2 class="text-center">Calendar</h2>
-<a class="btn btn-info left ml-3 mb-2"  href="{% url 'organizer:calendar' %}?{{ prev_month }}"> Previous Month </a>
-<a class="btn btn-info right mr-3 mb-2" href="{% url 'organizer:calendar' %}?{{ next_month }}"> Next Month </a>
-<a class="btn btn-info right" href="{% url 'organizer:event_new' %}"> New Event </a>
+
+<a class="btn btn-info left ml-3 mb-2 text-white"  href="{% url 'organizer:calendar' %}?{{ prev_month }}"> Previous Month </a>
+<a class="btn btn-info right mr-3 mb-2 text-white" href="{% url 'organizer:calendar' %}?{{ next_month }}"> Next Month </a>
+<a class="btn btn-info right mr-3 mb-2 text-white" href="{% url 'organizer:event_new' %}"> New Event </a>
 {{ calendar }}
 
 {% endblock %}
