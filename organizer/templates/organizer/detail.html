@@ -50,6 +50,7 @@
 <br>
 <form enctype='multipart/form-data' action="{% url 'organizer:upload_file' course.class_name%}" method="POST" data-ajax="false">
 {% csrf_token %}
+<h3>Upload Notes</h3> 
 {{ form.as_p }}
 <input type="submit" value="Add Notes"/>
 </form> 
