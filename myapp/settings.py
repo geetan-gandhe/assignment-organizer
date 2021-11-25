@@ -23,10 +23,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-esh8!e2^jmkxiuchnjlc1$&cn^2kag19h4o3qovfbf)_7u1cj6'
+# SECRET_KEY = 'django-insecure-esh8!e2^jmkxiuchnjlc1$&cn^2kag19h4o3qovfbf)_7u1cj6'
+SECRET_KEY = 'g=^i1x^*p+uf#uqe!une$nredl_id+6p6c=fq3g6mo$+67gv-='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_SECURE = True
+
+SECURE_SSL_REDIRECT = True
+
+# SECURE_HSTS_SECONDS = 60
 
 ALLOWED_HOSTS = ['https://organize-assignments.herokuapp.com', '*']
 
@@ -55,6 +64,7 @@ MEDIA_URL = '/media/'
 
 
 MIDDLEWARE = [
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
