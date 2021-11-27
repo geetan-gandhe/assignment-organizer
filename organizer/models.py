@@ -28,6 +28,9 @@ class Reviews(models.Model):
     def __str__(self):
         return str(self.course)
 
+#Sources for file upload: https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/, https://www.askpython.com/django/upload-files-to-django, https://stackoverflow.com/questions/15846120/uploading-a-file-in-django-with-modelforms
+#Sources for tags: https://django-taggit.readthedocs.io/en/latest/, https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf, https://aymane-talibi-at.medium.com/how-to-add-tags-in-django-19090e8d05d3
+
 class Notes(models.Model):
     file = models.FileField(upload_to='media/')
     course = models.ForeignKey(Class, related_name='notes_set', on_delete=models.CASCADE) 

@@ -52,6 +52,9 @@ class ClassListView(generic.ListView):
     def get_queryset(self):
         return Class.objects.all().values('class_name')
 
+#Sources for tags: https://django-taggit.readthedocs.io/en/latest/, https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf, https://aymane-talibi-at.medium.com/how-to-add-tags-in-django-19090e8d05d3
+
+
 class DetailView(View):
     def custom_detail_view(request, class_name):
         #try:
@@ -87,6 +90,8 @@ def profile_view(request):
         "schedule": request.user.students.all()
     }
     return render(request, 'organizer/profile.html', context)
+
+#Sources for file upload: https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/, https://www.askpython.com/django/upload-files-to-django, https://stackoverflow.com/questions/15846120/uploading-a-file-in-django-with-modelforms
 
 def upload_file(request, class_name):
     this_course = Class.objects.get(class_name=class_name)

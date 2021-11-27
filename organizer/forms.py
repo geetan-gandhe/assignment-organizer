@@ -3,6 +3,7 @@ from organizer.models import Notes
 from django.forms import ModelForm, DateInput
 from organizer.models import Event
 
+#Sources: https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/, https://www.askpython.com/django/upload-files-to-django, https://stackoverflow.com/questions/15846120/uploading-a-file-in-django-with-modelforms
 class NotesUploadForm(forms.ModelForm):
     file = forms.FileField()
     class Meta:

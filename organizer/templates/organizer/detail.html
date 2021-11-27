@@ -1,27 +1,59 @@
+<!-- #Sources for file upload: https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/, https://www.askpython.com/django/upload-files-to-django, https://stackoverflow.com/questions/15846120/uploading-a-file-in-django-with-modelforms
+#Sources for tags: https://django-taggit.readthedocs.io/en/latest/, https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf, https://aymane-talibi-at.medium.com/how-to-add-tags-in-django-19090e8d05d3
+ -->
 {% include 'base.html' %}
 {% load static %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
+
 <html>
 <body>
 <link rel="stylesheet" type="text/css" href="{% static 'organizer/style.css' %}">
 {% if user in course.users.all%}
 
+<h3><div class = "text-center mb-4 p-3 mb-2 bg-custom text-white"> {{ course.class_name }} </div></h3>
 
-<h1>{{ course.class_name }}</h1>
-
-
-<label for="enrollment" id=enrollment name=enrollment>Total Enrollment: {{course.enrollment}}</label>
+<h5><div class = "text-center mb-4 p-3 mb-2"> Total Enrollment: {{course.enrollment}}</div></h5>
 {% csrf_token %}
-<h2>Students</h2>
-{% if course.users%}
-    {% for user in course.users.all%}
-        <li>{{user.username}}</li>
-    {% endfor %}
-</ul>
-{% endif %}
 
+
+<form enctype='multipart/form-data' action="{% url 'organizer:upload_file' course.class_name%}" method="POST" data-ajax="false">
+    {% csrf_token %}
+    <a class="btn btn-custom3 btn-lg btn-block text-light" data-bs-toggle="collapse" href="#upnotes" role="button" aria-expanded="true" aria-controls="upnotes">
+        Upload Notes <i class="bi bi-arrow-down-circle-fill"></i>
+      </a>
+    <div class="collapse show" id="upnotes">
+        <div class="card card-body">
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-custom5">Add Notes</button> 
+    </form> 
+    </div>
+    </div>
+
+
+<a class="btn btn-custom3 btn-lg btn-block text-light" data-bs-toggle="collapse" href="#students" role="button" aria-expanded="true" aria-controls="students">
+    Currently Active Students <i class="bi bi-arrow-down-circle-fill"></i>
+  </a>
+  <div class="collapse show" id="students">
+    <div class="card card-body">
+        <ul>
+        {% if course.users%}
+        {% for user in course.users.all%}
+            <li class="list-unstyled"><i class="bi bi-file-person"></i>{{user.username}}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}    
+    </div>
+  </div>
+
+
+<br>
+
+<a class="btn btn-custom3 btn-lg btn-block text-light" data-bs-toggle="collapse" href="#notes" role="button" aria-expanded="true" aria-controls="notes">
+    All Class PDFs <i class="bi bi-arrow-down-circle-fill"></i>
+  </a>
+
+
+<div class="collapse show" id="notes">
+    <div class="card card-body">
 {% if slug%}
 <h2>Class PDFs: <div class="mr-1 badge badge-info"> {{slug}}</div></h2>
 {% else %}
@@ -47,13 +79,12 @@
 
 {% endfor %}
 </div>
+</div>
+</div>
+
+
 <br>
-<form enctype='multipart/form-data' action="{% url 'organizer:upload_file' course.class_name%}" method="POST" data-ajax="false">
-{% csrf_token %}
-<h3>Upload Notes</h3> 
-{{ form.as_p }}
-<input type="submit" value="Add Notes"/>
-</form> 
+
 {% else %}
 
 <p>You are not a currently a student in this class.</p>
@@ -61,23 +92,25 @@
 {% csrf_token %}
 <button class="btn btn-primary" type="submit">Join Class</button>
 </form>
-
-
-
 {% endif %}
 
-<h2>Reviews</h2>
-
+<a class="btn btn-custom3 btn-lg btn-block text-light" data-bs-toggle="collapse" href="#reviews" role="button" aria-expanded="true" aria-controls="notes">
+    Reviews <i class="bi bi-arrow-down-circle-fill"></i>
+  </a>
+<div class="collapse show" id="reviews">
+    <div class="card card-body">
 {% for element in reviews %}
     {{element.class_Instructor}} - 
     {{element.course}}:
     {{element.review}}
 <br>
 {% endfor %}
+</div>
+</div>
 
 <br>
 
-<a class="btn btn-primary" role="button" href="{% url 'organizer:classes' %}">See All Classes</a>
+<a class="btn btn-primary ml-4" role="button" href="{% url 'organizer:classes' %}">See All Classes</a>
 
 <br>
 <br>

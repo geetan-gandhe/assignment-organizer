@@ -10,8 +10,9 @@
 <h3><div class = "text-center mb-4 p-3 mb-2 bg-custom text-white"> Classes 2021-2022 </div></h3>
 
 <div class="col text-center">
-  <a class="btn btn-secondary btn-lg btn-bloc" href="{% url 'organizer:reviews' %}" role="button">Leave a review for a class</a>
+  <a class="btn btn-custom btn-lg btn-block text-white" href="{% url 'organizer:reviews' %}" role="button">Leave a review for a class</a>
   </div>
+  <br>
 <ul>
 {% csrf_token %}
 {% for element in classes_list %}
