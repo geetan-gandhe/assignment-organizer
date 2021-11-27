@@ -37,10 +37,6 @@ class Notes(models.Model):
     tags = TaggableManager()
 
 
-class NotesUploadForm(forms.ModelForm):
-    class Meta:
-        model = Notes
-        fields = ('file','course',)
 
 
 # Create your models here.
