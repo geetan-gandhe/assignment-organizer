@@ -162,6 +162,7 @@ def index(request): #the index view
         if "taskAdd" in request.POST: #checking if there is a request to add a todo
             title = request.POST["description"] #title
             date = str(request.POST["date"]) #date
+            email= request.POST["email"]
             category = request.POST["category_select"] #category
             content = title + " -- " + date + " " + category #content
             Todo = TodoList(title=title, content=content, due_date=date, category=Category.objects.get(name=category))
@@ -174,7 +175,7 @@ def index(request): #the index view
             message2 = MIMEMultipart("alternative")
             message2["Subject"] = "You have a new task!"
             message2["From"] = sender_email
-            message2["To"] = receiver_email
+            message2["To"] = email
             
 
             # Create the plain-text and HTML version of your message
