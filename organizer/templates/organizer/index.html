@@ -1,8 +1,7 @@
 {% include 'base.html' %}
 {% load static %}
 {% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
+
 
 
 <!DOCTYPE html>
@@ -10,16 +9,15 @@
 <head>
   <meta charset="UTF-8">
   <title>TodoApp - Django</title>
-   <link rel="stylesheet" type="text/css" href="{% static 'organizer/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'organizer/style.css' %}">
 </head>
 
-
 <h3><div class = "text-center mb-4 p-3 mb-2 bg-custom text-white"> Assignment and Task Organizer</div></h3>
-<h4><p class = "text-left ml-5">Please add your to-do list items below.</p></h4>
 <body>
 <div django-app="TaskManager">        
 	<div class="container">
             <div class="content">
+            <h4><p class = "text-left"> Please add your to-do list items below.</p></h4>
             <form action="" method="post">
             {% csrf_token %} 
                 <div class="inputContainer">
@@ -30,17 +28,16 @@
                 </div>
                 <div class="inputContainer half last">
                     <blockquote class="blockquote text-left">
-                    <option class="disabled" value="">Choose a category:</option>
-                    <select id="category" class="taskCategory" name="category_select">
+                    <label for="category_select" value="">Category:</label>
+                    <select style="margin-left:40px" id="category" class="taskCategory" name="category_select">
                     {% for category in categories %}
                         <option class="" value="{{ category.name }}" name="{{ category.name }}" required>{{ category.name }}</option>
                     {% endfor %}
                     </select>
                     </blockquote> 
                 </div>
-                <div class="inputContainer half last right">
+                <div class="inputContainer half last">
                     <blockquote class="blockquote text-left">
-
                     <label for="dueDate">Due Date:</label>
                     <input style="margin-left:40px" type="date" id="dueDate" class="taskDate" name="date" required>
                     </blockquote> 
@@ -48,24 +45,19 @@
 
                 <div class="row">
                     <blockquote class="blockquote text-right">
-                    &nbsp;<button class="btn btn-primary" name="taskAdd" type="submit">Add task</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;<button class="btn btn-custom5" name="taskAdd" type="submit">Add Task</button>&nbsp;&nbsp;&nbsp;&nbsp;
                     </blockquote> 
                 </div>
 
-                <div class="card bg-light mb-3" style="max-width: 75rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Your tasks are below:</h5>
-                    </div>
-                </div>
-                <div class="row">
-                    <blockquote class="blockquote text-right">
+                <div class="mb-3">
+                <h5><div class = "text-center mb-4 p-3 mb-2 btn-custom text-white"> Your Tasks</div></h5>
 
-                    <button class="btn btn-primary" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();">Complete Task</button>
-                    </blockquote> 
                 </div>
-            
-            
-            <ul  class="taskList">
+                <button class="btn btn-custom5 right" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();">Complete Task</button>
+
+            <br>
+            <br>
+            <ul class="custom">
             {% for todo in todos %} <!-- django template lang - for loop -->
                 <li class="list-group">
                     <li class="list-group-item">
@@ -73,11 +65,9 @@
                     <div plabel for="{{ todo.id }}"><span class="complete-">{{ todo.title }}</span></label></div>
                     <div span class="category-{{ todo.category }}">{{ todo.category }}</span></div>
                     <div strong class="taskDate"><p class="text-light bg-primary">Due Date: {{ todo.due_date }}</p></strong></div>
+                    </li>
                 </li>
-                </li>
-            {% endfor %}
-            
-            
+            {% endfor %} 
             </ul><!-- taskList -->
             </form>
             </div><!-- content -->
