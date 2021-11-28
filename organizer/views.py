@@ -21,6 +21,7 @@ from organizer.models import Class, Notes, Reviews
 from organizer.forms import EventForm, NotesUploadForm
 from .models import TodoList, Category
 
+import requests
 from datetime import date, datetime, timedelta
 from django.utils.safestring import mark_safe
 
@@ -29,6 +30,9 @@ from .utils import Calendar
 from .forms import EventForm
 import datetime
 import calendar
+
+from django.core.mail import send_mail
+
 
 
 def home(request):
@@ -145,31 +149,88 @@ def join_class(request, class_name):
     return render(request, 'organizer/detail.html', context)
 
 
-
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 # Create your views here.
 
 def index(request): #the index view
-	todos = TodoList.objects.all() #quering all todos with the object manager
-	categories = Category.objects.all() #getting all categories with object manager
-	if request.method == "POST": #checking if the request method is a POST
-		if "taskAdd" in request.POST: #checking if there is a request to add a todo
-			title = request.POST["description"] #title
-			date = str(request.POST["date"]) #date
-			category = request.POST["category_select"] #category
-			content = title + " -- " + date + " " + category #content
-			Todo = TodoList(title=title, content=content, due_date=date, category=Category.objects.get(name=category))
-			Todo.save() #saving the todo 
-			return redirect("/index") #reloading the page
-		
-		if "taskDelete" in request.POST: #checking if there is a request to delete a todo
-			checkedlist = request.POST["checkedbox"] #checked todos to be deleted
-			for todo_id in checkedlist:
-				todo = TodoList.objects.get(id=int(todo_id)) #getting todo id
-				todo.delete() #deleting todo
+    todos = TodoList.objects.all() 
+    categories = Category.objects.all() #getting all categories with object manager 
+    if request.method == "POST": #checking if the request method is a POST
+        if "taskAdd" in request.POST: #checking if there is a request to add a todo
+            title = request.POST["description"] #title
+            date = str(request.POST["date"]) #date
+            category = request.POST["category_select"] #category
+            content = title + " -- " + date + " " + category #content
+            Todo = TodoList(title=title, content=content, due_date=date, category=Category.objects.get(name=category))
+            Todo.save() #saving the todo 
+            sender_email = "assignmentorganizera27@gmail.com"
+            receiver_email = "williamsgchenelle@gmail.com"
+            password = "GroupA27Pass!"
 
-	return render(request, "organizer/index.html", {"todos": todos, "categories":categories})
+            
+            message2 = MIMEMultipart("alternative")
+            message2["Subject"] = "You have a new task!"
+            message2["From"] = sender_email
+            message2["To"] = receiver_email
+            
 
+            # Create the plain-text and HTML version of your message
+            html = """\
+            <html>
+            <body>
+                <p>Hi,<br>
+                How are you?<br>
+                <a href="http://www.realpython.com">Real Python</a> 
+                has many great tutorials.
+                </p>
+            </body>
+            </html>
+            """
+            
+            body = {
+            'Greeting': "Hello!",
+            'Sen': "A new task has been adding. Your task details are below: ",
+            's': " ",
+            'n1': "Description",
+			'Task title': title, 
+            's1': " ",
+            'n2': "Category",
+			'Category': category, 
+            's2': " ",
+            'n3': "Due Date",
+			'Due Date': date, 
+            's3': " ",
+            'endgreeting': "Thank you",
+            'endgreeting2': "Assignment and Task Organizer (A27)",
+			}
+            
+            body2="\n".join(body.values())
+            d=MIMEText(body2, "plain")
+            message2.attach(d)
+            # Create secure connection with server and send email
+            context = ssl.create_default_context()
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+                server.login(sender_email, password)
+                server.sendmail(
+                sender_email, receiver_email, message2.as_string()
+            )
+            return redirect("/index") #reloading the page
+        
+        if "taskDelete" in request.POST: #checking if there is a request to delete a todo
+            checkedlist = request.POST["checkedbox"] #checked todos to be deleted
+            for todo_id in checkedlist:
+                todo = TodoList.objects.get(id=int(todo_id)) #getting todo id
+                todo.delete() #deleting tod
+        
+    return render(request, "organizer/index.html", {"todos": todos, "categories":categories})
+
+from django.core.mail import send_mail
+from django.conf import settings
+
+    
 class CalendarView(generic.ListView):
     model = Event
     template_name = 'organizer/calendar.html'
@@ -222,3 +283,5 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse('organizer:calendar'))
     return render(request, 'organizer/event.html', {'form': form})
+
+
