@@ -96,6 +96,8 @@ def profile_view(request):
 def upload_file(request, class_name):
     this_course = Class.objects.get(class_name=class_name)
     template = loader.get_template('organizer/detail.html')
+    common_tags = Notes.tags.most_common()[:4]
+
     if request.method == 'POST':
         form = NotesUploadForm(request.POST, request.FILES)
         if form.is_valid():
@@ -119,7 +121,8 @@ def upload_file(request, class_name):
     context = {
         'form': form,
         'course': this_course,
-        'notes': this_course.notes_set.all()
+        'notes': this_course.notes_set.all(),
+        'common_tags': common_tags,
     }
     return render(request, 'organizer/detail.html', context)
 
