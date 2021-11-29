@@ -51,7 +51,6 @@
                     </blockquote>    
                     </div>
 
-
                 <div class="row">
                     <blockquote class="blockquote text-right">
                     &nbsp;<button class="btn btn-custom5" name="taskAdd" type="submit">Add Task</button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -81,16 +80,6 @@
                 </li>
             {% endfor %} 
             </ul><!-- taskList -->
-            </form>
-            <form action="" method="post">
-            {% csrf_token %} 
-             <div class="inputContainer">
-                <blockquote class="blockquote text-left">
-                    <label for="email">Email to send list of tasks to:      </label>
-                    <input style="margin-left:20px" type="text" id="email" class="email" placeholder="Enter your email here" name="email" required>
-                    &nbsp;<button class="btn btn-primary" name="email" type="submit">Add task</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                </blockquote> 
-                </div> 
             </form>
             </div><!-- content -->
 
