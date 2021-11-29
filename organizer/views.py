@@ -183,7 +183,7 @@ def index(request): #the index view
             Todo.save() #saving the todo 
 
             sender_email = "assignmentorganizera27@gmail.com"
-            receiver_email = "williamsgchenelle@gmail.com"
+            receiver_email = email
             password = "GroupA27Pass!"
 
             
@@ -219,7 +219,7 @@ def index(request): #the index view
             'n3': "Due Date",
 			'Due Date': date, 
             's3': " ",
-            'endgreeting': "Thank you",
+            'endgreeting': "Thank you!",
             'endgreeting2': "Assignment and Task Organizer (A27)",
 			}
             
