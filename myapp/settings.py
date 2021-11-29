@@ -165,7 +165,19 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 3 #ID is 3 on prod! make sure to change before commits (4 for Chenelle's local)
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'EMAIL_HOST_USER'
+EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'email@email.com'
+
+SENDGRID_API_KEY='SENDGRID_API_KEY'
+SENDGRID_PASSWORD='SENDGRID_PASSWORD'
+SENDGRID_USERNAME='SENDGRID_USERNAME'
+
+#oiqnqjanlnculncw
+SITE_ID = 4 #ID is 3 on prod! make sure to change before commits (4 for Chenelle's local)
 
 LOGIN_REDIRECT_URL = '/organizer/home/'
 LOGOUT_REDIRECT_URL = '/organizer/home/'
