@@ -1,4 +1,4 @@
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 from calendar import calendar
 from django.contrib.auth.views import redirect_to_login
 from django.http import HttpResponseRedirect
@@ -56,6 +56,9 @@ class ClassListView(generic.ListView):
     def get_queryset(self):
         return Class.objects.all().values('class_name')
 
+#Sources for tags: https://django-taggit.readthedocs.io/en/latest/, https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf, https://aymane-talibi-at.medium.com/how-to-add-tags-in-django-19090e8d05d3
+
+
 class DetailView(View):
     def custom_detail_view(request, class_name):
         #try:
@@ -92,9 +95,13 @@ def profile_view(request):
     }
     return render(request, 'organizer/profile.html', context)
 
+#Sources for file upload: https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/, https://www.askpython.com/django/upload-files-to-django, https://stackoverflow.com/questions/15846120/uploading-a-file-in-django-with-modelforms
+
 def upload_file(request, class_name):
     this_course = Class.objects.get(class_name=class_name)
     template = loader.get_template('organizer/detail.html')
+    common_tags = Notes.tags.most_common()[:4]
+
     if request.method == 'POST':
         form = NotesUploadForm(request.POST, request.FILES)
         if form.is_valid():
@@ -118,7 +125,8 @@ def upload_file(request, class_name):
     context = {
         'form': form,
         'course': this_course,
-        'notes': this_course.notes_set.all()
+        'notes': this_course.notes_set.all(),
+        'common_tags': common_tags,
     }
     return render(request, 'organizer/detail.html', context)
 
@@ -152,21 +160,28 @@ def join_class(request, class_name):
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 
 def index(request): #the index view
-    todos = TodoList.objects.all() 
-    categories = Category.objects.all() #getting all categories with object manager 
+
+    todos = TodoList.objects.all() #quering all todos with the object manager
+    categories = Category.objects.all() #getting all categories with object manager
+
     if request.method == "POST": #checking if the request method is a POST
         if "taskAdd" in request.POST: #checking if there is a request to add a todo
             title = request.POST["description"] #title
             date = str(request.POST["date"]) #date
+
             email= request.POST["email"]
+
             category = request.POST["category_select"] #category
             content = title + " -- " + date + " " + category #content
             Todo = TodoList(title=title, content=content, due_date=date, category=Category.objects.get(name=category))
             Todo.save() #saving the todo 
+
             sender_email = "assignmentorganizera27@gmail.com"
             receiver_email = email
             password = "GroupA27Pass!"
@@ -219,17 +234,18 @@ def index(request): #the index view
                 sender_email, receiver_email, message2.as_string()
             )
             return redirect("/index") #reloading the page
-        
+
         if "taskDelete" in request.POST: #checking if there is a request to delete a todo
             checkedlist = request.POST["checkedbox"] #checked todos to be deleted
+            print(checkedlist)
+            todo_id_f = ""
             for todo_id in checkedlist:
-                todo = TodoList.objects.get(id=int(todo_id)) #getting todo id
-                todo.delete() #deleting tod
-        
+                todo_id_f = todo_id_f + str(todo_id)
+            print(todo_id_f, "todo")
+            todo = TodoList.objects.filter(id=int(todo_id_f))
+            todo.delete() #deleting todo
     return render(request, "organizer/index.html", {"todos": todos, "categories":categories})
 
-from django.core.mail import send_mail
-from django.conf import settings
 
     
 class CalendarView(generic.ListView):

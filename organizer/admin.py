@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 
 
-from organizer.models import Class, Notes, NotesUploadForm, TodoList, Category, Reviews, Event
+from organizer.models import Class, Notes, TodoList, Category, Reviews, Event
 
 # Register your models here.
 admin.site.register(Class)
