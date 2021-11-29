@@ -18,6 +18,7 @@
 	<div class="container">
             <div class="content">
             <h4><p class = "text-left"> Please add your to-do list items below.</p></h4>
+            <p class = "text-left"> We will send you an email notification for your new task.</p>
             <form action="" method="post">
             {% csrf_token %} 
                 <div class="inputContainer">
@@ -52,7 +53,7 @@
                     </div>
 
                 <div class="row">
-                    <blockquote class="blockquote text-right">
+                    <blockquote class="blockquote text-left">
                     &nbsp;<button class="btn btn-custom5" name="taskAdd" type="submit">Add Task</button>&nbsp;&nbsp;&nbsp;&nbsp;
 
                     </blockquote> 
@@ -64,7 +65,7 @@
                 <h5><div class = "text-center mb-4 p-3 mb-2 btn-custom text-white"> Your Tasks</div></h5>
 
                 </div>
-                <button class="btn btn-custom5 right" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();">Complete Task</button>
+                <button class="btn btn-custom5" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();">Complete Task</button>
 
             <br>
             <br>

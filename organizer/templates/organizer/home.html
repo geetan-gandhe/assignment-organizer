@@ -33,19 +33,9 @@
   <br>
 
 
-<h3><div class = "text-center mb-4"> <a class="btn btn-primary btn-lg " href="{% url 'organizer:classes' %}" role="button">See All Classes</a> </div></h3>
-
-<h3><div class = "text-center mb-4"> <a class="btn btn-primary btn-lg " href="{% url 'organizer:todo' %}" role="button">Assignment Organizer</a> </div></h3>
-
-<h3><div class = "text-center mb-4"> <a class="btn btn-primary btn-lg " href="{% url 'organizer:calendar' %}" role="button">Calendar</a> </div></h3>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
 
 {% else %}
-<p>Please login to access assignments and notes.</p>
+<p><div class= "text-center mb-4">Please login to access assignments and notes.</div></p>
 {% endif %}
 
 
