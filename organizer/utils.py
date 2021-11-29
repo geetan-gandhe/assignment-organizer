@@ -2,6 +2,8 @@ from datetime import datetime, timedelta
 from calendar import HTMLCalendar
 from .models import Event
 
+### Citations: https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html
+
 class Calendar(HTMLCalendar):
 	def __init__(self, year=None, month=None):
 		self.year = year
