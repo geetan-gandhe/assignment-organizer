@@ -1,12 +1,13 @@
 from django.test import TestCase, Client, RequestFactory
 from django.contrib.auth import get_user_model
-from organizer.models import Class,Notes, Reviews, Category, TodoList
+from organizer.models import Class, Notes, Reviews, Category, TodoList
 from django.core.files import File
 from django.urls import reverse
 from organizer.views import ClassListView, loginPage, home
 from django.contrib.auth.models import AnonymousUser, User
 
-#from oauth2 import Client
+
+# from oauth2 import Client
 
 import mock
 
@@ -266,3 +267,35 @@ class ToDoTest(TestCase):
                                                "due_date": "2020-12-04"
                                                })
         self.assertTrue(response.status_code, 404)
+
+class CalendarTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_calendar_http(self):
+        response = self.client.get('/calendar/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_calendar_event_http(self):
+        response = self.client.get('/event/new/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_calendar_events1(self):
+        data = {'title': 'test_title',
+                'description': 'test_description',
+                'start_time': '2020-11-22 10:44 AM',
+                'end_time': '2020-12-22 11:19 AM', }
+        response = self.client.post('/event/new/', data)
+        post = response.get('/event/new/', data)
+        self.assertEqual(post['title'], 'test_title')
+
+    def test_calendar_events2(self):
+        data = {'title': 'test_title',
+                'description': 'test_description',
+                'start_time': '2020-11-22 10:44 AM',
+                'end_time': '2020-12-22 11:19 AM', }
+        response = self.client.post('/event/new/', data)
+        post = response.get('/event/new/', data)
+        self.assertEqual(post['start_time'], '2020-11-22 10:44 AM')
+
+
