@@ -73,7 +73,7 @@
             {% for todo in todos %} <!-- django template lang - for loop -->
                 <li class="list-group">
                     <li class="list-group-item">
-                    <input type="checkbox" class="Checkbox" name="checkedbox" id="{{ todo.id }}" value="{{ todo.id }}" >
+                    <input type="checkbox" class="Checkbox" name="checkedbox" id="{{ todo.id }}" value="{{ todo.id }}">
                     <div label for="{{ todo.id }}"><span class="complete-">{{ todo.title }}</span></label></div>
                     <div span class="category-{{ todo.category }}">{{ todo.category }}</span></div>
                     <div strong class="taskDate"><p class="text-light bg-primary">Due Date: {{ todo.due_date }}</p></strong></div>
@@ -95,5 +95,7 @@
 <br>
 </br>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
 </body>
 </html>
