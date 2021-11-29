@@ -18,6 +18,7 @@
 	<div class="container">
             <div class="content">
             <h4><p class = "text-left"> Please add your to-do list items below.</p></h4>
+            <p class = "text-left"> You will receive an email notification for your new task.</p>
             <form action="" method="post">
             {% csrf_token %} 
                 <div class="inputContainer">
@@ -43,13 +44,6 @@
                     <input style="margin-left:40px" type="date" id="dueDate" class="taskDate" name="date" required>
                     </blockquote> 
                 </div>
-                
-                <div class="inputContainer">
-                    <blockquote class="blockquote text-left">
-                        <label for="email">Email:      </label>
-                        <input style="margin-left:20px" type="text" id="email" class="email" placeholder="Enter your email here" name="email" required>
-                    </blockquote>    
-                    </div>
 
 
                 <div class="row">
@@ -86,9 +80,7 @@
             {% csrf_token %} 
              <div class="inputContainer">
                 <blockquote class="blockquote text-left">
-                    <label for="email">Email to send list of tasks to:      </label>
-                    <input style="margin-left:20px" type="text" id="email" class="email" placeholder="Enter your email here" name="email" required>
-                    &nbsp;<button class="btn btn-primary" name="email" type="submit">Add task</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary" name="email" type="submit">Add task</button>&nbsp;&nbsp;&nbsp;&nbsp;
                 </blockquote> 
                 </div> 
             </form>

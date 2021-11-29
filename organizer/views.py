@@ -175,7 +175,7 @@ def index(request): #the index view
             title = request.POST["description"] #title
             date = str(request.POST["date"]) #date
 
-            email= request.POST["email"]
+            email= request.user.email
 
             category = request.POST["category_select"] #category
             content = title + " -- " + date + " " + category #content
@@ -208,7 +208,7 @@ def index(request): #the index view
             
             body = {
             'Greeting': "Hello!",
-            'Sen': "A new task has been adding. Your task details are below: ",
+            'Sen': "A new task has been added. Your task details are below: ",
             's': " ",
             'n1': "Description",
 			'Task title': title, 
