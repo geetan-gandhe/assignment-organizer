@@ -3,10 +3,11 @@
 
 
 <link rel="stylesheet" type="text/css" href="{% static 'organizer/style.css' %}">
-<h4><p class="text-primary">Leave a review!</p></h4>
+<h3><div class = "text-center mb-4 p-3 mb-2 bg-custom text-white"> Leave a Review!</div></h3>
+
 
     <h5><form method="post">{% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" class="btn btn-warning" value="Save your comments!">
+    <input type="submit" class="btn btn-warning ml-4" value="Save your comments!">
     </form></h5>
 </div>

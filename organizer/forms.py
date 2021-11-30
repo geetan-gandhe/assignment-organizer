@@ -13,6 +13,8 @@ class NotesUploadForm(forms.ModelForm):
 class CreateNotes(forms.Form):
     file = forms.FileField()
 
+### Source: https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html
+
 class EventForm(ModelForm):
   class Meta:
     model = Event

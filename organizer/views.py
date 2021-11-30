@@ -233,7 +233,7 @@ def index(request): #the index view
             todo.delete() #deleting todo
     return render(request, "organizer/index.html", {"todos": todos, "categories":categories})
 
-
+### Source: https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html
     
 class CalendarView(generic.ListView):
     model = Event
