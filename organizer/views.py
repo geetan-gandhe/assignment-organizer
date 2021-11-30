@@ -169,7 +169,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 # Create your views here.
-@method_decorator(login_required)
+@login_required
 def index(request): #the index view
 
     todos = TodoList.objects.all() #quering all todos with the object manager
