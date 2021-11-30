@@ -208,7 +208,7 @@ def index(request): #the index view
             "content": [
                 {
                 "type": "text/html",
-                'value':  "<html>\n  <head></head>\n  <body>\n    <p>Hello! You have a new task\n </p> <p>Good job staying organized! The details of your new tasks are below:\n</p>    <p> Title: -title-\n</p> <p>Category: -cat- \n</p> <p> Date: -date-\n</p>\n <p>Your Assignment Organizer,</p> <p> Group A27 </p> </body>\n</html>"
+                'value':  "<html>\n  <head></head>\n  <body>\n    <p>Hello! You have a new task.\n </p> <p>Good job staying organized! The details of your new task are below:\n</p>    <p> Title: -title-\n</p> <p>Category: -cat- \n</p> <p> Date: -date-\n</p>\n <p>Your Assignment Organizer,</p> <p> Group A27 </p> </body>\n</html>"
                           },
                 
                         ]
