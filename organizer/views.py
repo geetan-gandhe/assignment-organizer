@@ -30,6 +30,8 @@ from .utils import Calendar
 from .forms import EventForm
 import datetime
 import calendar
+import sendgrid
+import os
 
 from django.core.mail import send_mail
 
@@ -182,57 +184,42 @@ def index(request): #the index view
             Todo = TodoList(title=title, content=content, due_date=date, category=Category.objects.get(name=category))
             Todo.save() #saving the todo 
 
-            sender_email = "assignmentorganizera27@gmail.com"
-            receiver_email = email
-            password = "GroupA27Pass!"
 
+            sg = sendgrid.SendGridAPIClient(api_key=('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'))
+            data = {
+            "personalizations": [
+                {
+                "to": [
+                    {
+                    "email": email
+                    }
+                ],
+                "subject": "You have a new task!",
+                "substitutions": {
+                    "-title-": title,
+                    "-cat-": category,
+                    "-date-":date,
+                                },
+                }
+            ],
+            "from": {
+                "email": "assignmentorganizera27@gmail.com"
+            },
+            "content": [
+                {
+                "type": "text/html",
+                'value':  "<html>\n  <head></head>\n  <body>\n    <p>Hello! You have a new task.\n </p> <p>Good job staying organized! The details of your new task are below:\n</p>    <p> Title: -title-\n</p> <p>Category: -cat- \n</p> <p> Date: -date-\n</p>\n <p>Your Assignment Organizer,</p> <p> Group A27 </p> </body>\n</html>"
+                          },
+                
+                        ]
+            }
             
-            message2 = MIMEMultipart("alternative")
-            message2["Subject"] = "You have a new task!"
-            message2["From"] = sender_email
-            message2["To"] = email
             
-
-            # Create the plain-text and HTML version of your message
-            html = """\
-            <html>
-            <body>
-                <p>Hi,<br>
-                How are you?<br>
-                <a href="http://www.realpython.com">Real Python</a> 
-                has many great tutorials.
-                </p>
-            </body>
-            </html>
-            """
-            
-            body = {
-            'Greeting': "Hello!",
-            'Sen': "A new task has been adding. Your task details are below: ",
-            's': " ",
-            'n1': "Description",
-			'Task title': title, 
-            's1': " ",
-            'n2': "Category",
-			'Category': category, 
-            's2': " ",
-            'n3': "Due Date",
-			'Due Date': date, 
-            's3': " ",
-            'endgreeting': "Thank you!",
-            'endgreeting2': "Assignment and Task Organizer (A27)",
-			}
-            
-            body2="\n".join(body.values())
-            d=MIMEText(body2, "plain")
-            message2.attach(d)
-            # Create secure connection with server and send email
-            context = ssl.create_default_context()
-            with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-                server.login(sender_email, password)
-                server.sendmail(
-                sender_email, receiver_email, message2.as_string()
-            )
+            response = sg.client.mail.send.post(request_body=data)
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+                       
             return redirect("/index") #reloading the page
 
         if "taskDelete" in request.POST: #checking if there is a request to delete a todo
