@@ -203,7 +203,7 @@ def index(request): #the index view
                 }
             ],
             "from": {
-                "email": "cw4fk@virginia.edu"
+                "email": "assignmentorganizera27@gmail.com"
             },
             "content": [
                 {
