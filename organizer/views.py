@@ -171,13 +171,14 @@ def index(request): #the index view
 
     todos = TodoList.objects.all() #quering all todos with the object manager
     categories = Category.objects.all() #getting all categories with object manager
+    print(request.user.email)
 
     if request.method == "POST": #checking if the request method is a POST
         if "taskAdd" in request.POST: #checking if there is a request to add a todo
             title = request.POST["description"] #title
             date = str(request.POST["date"]) #date
 
-            email= request.POST["email"]
+            email= request.user.email
 
             category = request.POST["category_select"] #category
             content = title + " -- " + date + " " + category #content
