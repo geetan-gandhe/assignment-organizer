@@ -185,7 +185,7 @@ def index(request): #the index view
             Todo.save() #saving the todo 
 
 
-            sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
+            sg = sendgrid.SendGridAPIClient(api_key=('SENDGRID_API_KEY'))
             data = {
             "personalizations": [
                 {
