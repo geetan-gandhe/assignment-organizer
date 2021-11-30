@@ -11,7 +11,9 @@
 
 <h3><div class = "text-center mb-4 p-3 mb-2 bg-custom text-white"> {{ course.class_name }} </div></h3>
 
-<h5><div class = "text-center mb-4 p-3 mb-2"> Total Enrollment: {{course.enrollment}}</div></h5>
+<h5><div class = "text-center"> <i class="bi bi-calendar"></i> {{course.days}}</div></h5>
+<h5><div class = "text-center"> <i class="bi bi-clock"></i> {{course.timing}}</div></h5>
+<h5><div class = "text-center p-3 mb-2"> <i class="bi bi-mortarboard-fill"></i> Total Enrollment: {{course.enrollment}}</div></h5>
 {% csrf_token %}
 
 
@@ -102,7 +104,6 @@
 
  {% for element in reviews %}
         <h5> <div> Professor {{element.class_Instructor}} </div> </h5>
-        <h7> <div> {{element.course}} </div> </h7>
     <p style="color:DimGrey;">{{element.review}}</p> <HR>
 {% endfor %}
 

@@ -17,10 +17,12 @@
 {% if user.is_authenticated %}
   <p class="text-center ml-2 pl-2">Welcome, {{ user.username }}!</p>
 
-<h3 class="ml-2 pl-2">Classes You're Enrolled In:</h3>
+<h3 class="ml-2 pl-2">Your Classes:</h3>
   {% for course in schedule%} 
       <li class="list-group-item">
-        <a class="btn btn-danger btn-lg" role="button" href="{% url 'organizer:detail' course %}">{{course}}</a>
+        <a class="btn btn-danger btn-lg" id="class" role="button" href="{% url 'organizer:detail' course %}">{{course}}</a>
+        <label for="class"><i class="bi bi-calendar"></i> {{course.days}}, <i class="bi bi-clock"></i> {{course.timing}}</label>
+
       </li>
   {% endfor %}
 

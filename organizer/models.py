@@ -12,6 +12,8 @@ class Class(models.Model):
     class_name = models.CharField(max_length=100, default="CS3240")
     users = models.ManyToManyField(User, related_name="students")
     enrollment = models.IntegerField(default=50)
+    days = models.CharField(max_length=100, default="Monday/Wednesday/Friday")
+    timing = models.CharField(max_length=100, default="11:00-12:15")
     class Meta:
             ordering = ['class_name']
     def __str__(self):
