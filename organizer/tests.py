@@ -209,6 +209,10 @@ class ToDoTest(TestCase):
         test_todo = TodoList.objects.get(content='alpha')
         self.assertNotEqual(len(test_todo.title), 0)
 
+    def test_todo_http(self):
+        response = self.client.get('/index')
+        self.assertEqual(response.status_code, 302)
+
     def test_todo_max(self):
         test_cat = Category.objects.create(name='cat1')
         test_todo = TodoList.objects.create(title='title',
