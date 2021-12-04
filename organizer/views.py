@@ -172,7 +172,9 @@ from django.conf import settings
 @login_required
 def index(request): #the index view
 
-    todos = TodoList.objects.all() #quering all todos with the object manager
+    #todos = TodoList.objects.all() #quering all todos with the object manager
+    todos = TodoList.objects.filter(user=request.user)
+
     categories = Category.objects.all() #getting all categories with object manager
     print(request.user.email)
     if request.user.is_authenticated:
@@ -186,7 +188,8 @@ def index(request): #the index view
 
             category = request.POST["category_select"] #category
             content = title + " -- " + date + " " + category #content
-            Todo = TodoList(title=title, content=content, due_date=date, category=Category.objects.get(name=category))
+            user=request.user
+            Todo = TodoList(title=title, content=content, due_date=date, category=Category.objects.get(name=category), user=user)
             Todo.save() #saving the todo 
 
 
