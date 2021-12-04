@@ -247,11 +247,6 @@ class CalendarView(generic.ListView):
     model = Event()
     template_name = 'organizer/calendar.html'
 
-    def get_queryset(self):
-        queryset=  Event.objects.all().filter(user=self.request.user)
-        print(queryset)
-        return queryset
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -281,7 +276,7 @@ def prev_month(d):
     prev_month = first - timedelta(days=1)
     month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
     return month
-    
+
 @login_required
 def next_month(d):
     days_in_month = calendar.monthrange(d.year, d.month)[1]
