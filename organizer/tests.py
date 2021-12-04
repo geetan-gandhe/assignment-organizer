@@ -285,7 +285,7 @@ class CalendarTest(TestCase):
 
     def test_calendar_http(self):
         response = self.client.get('/calendar/')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     def test_calendar_event_http(self):
         response = self.client.get('/event/new/')
