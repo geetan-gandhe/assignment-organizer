@@ -76,6 +76,7 @@ class Event(models.Model):
     description = models.TextField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     @property
     def get_html_url(self):

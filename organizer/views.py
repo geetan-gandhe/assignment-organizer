@@ -2,7 +2,7 @@ from __future__ import print_function, unicode_literals
 from calendar import calendar
 from django.contrib.auth.views import redirect_to_login
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, resolve_url
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -242,10 +242,15 @@ def index(request): #the index view
     return render(request, "organizer/index.html", {"todos": todos, "categories":categories})
 
 ### Source: https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html
-    
+
 class CalendarView(generic.ListView):
-    model = Event
+    model = Event()
     template_name = 'organizer/calendar.html'
+
+    def get_queryset(self):
+        queryset=  Event.objects.all().filter(user=self.request.user)
+        print(queryset)
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -257,12 +262,12 @@ class CalendarView(generic.ListView):
         cal = Calendar(d.year, d.month)
 
         # Call the formatmonth method, which returns our calendar as a table
-        html_cal = cal.formatmonth(withyear=True)
+        html_cal = cal.formatmonth(user=self.request.user, withyear=True)
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
-        print(context)
         return context
+
 
 def get_date(req_month):
     if req_month:
@@ -283,16 +288,18 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+@login_required
 def event(request, event_id=None):
     instance = Event()
     if event_id:
         instance = get_object_or_404(Event, pk=event_id)
     else:
         instance = Event()
-
     form = EventForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
-        form.save()
+        object = form.save(commit=False)
+        object.user = request.user
+        object.save()
         return HttpResponseRedirect(reverse('organizer:calendar'))
     return render(request, 'organizer/event.html', {'form': form})
 
