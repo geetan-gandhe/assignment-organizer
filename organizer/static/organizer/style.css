@@ -20,6 +20,11 @@ a[aria-expanded=false] .bi-arrow-down-circle-fill {
   background-color: #FDB44E ;
 }
 
+.bg-custom2{
+  background-color: #5A61B0 !important ;
+  background: #5A61B0 !important;
+}
+
 .btn-custom3{
   background-color: #7DB0A8 ;
   background-color: #7DB0A8 ;

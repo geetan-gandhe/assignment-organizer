@@ -17,14 +17,26 @@
 {% if user.is_authenticated %}
   <p class="text-center ml-2 pl-2">Welcome, {{ user.username }}!</p>
 
-<h3 class="ml-2 pl-2">Your Classes:</h3>
-  {% for course in schedule%} 
-      <li class="list-group-item">
-        <a class="btn btn-danger btn-lg" id="class" role="button" href="{% url 'organizer:detail' course %}">{{course}}</a>
-        <label for="class"><i class="bi bi-calendar"></i> {{course.days}}, <i class="bi bi-clock"></i> {{course.timing}}</label>
+<h3 class="ml-2 pl-2">Your Classes</h3>
+      <table class="table table-hover table-custom">
+        <thead class="bg-custom2 text-white">
+          <tr>
+            <th scope="col" class="bg-custom2">Class</th>
+            <th scope="col">Days</th>
+            <th scope="col">Timing</th>
+          </tr>
+        </thead>
+      {% for course in schedule%} 
+      <tbody>
+        <tr>
+          <td><a class="btn btn-danger btn-lg" id="class" role="button" href="{% url 'organizer:detail' course %}">{{course}}</a></td>
+          <td><i class="bi bi-calendar"></i> {{course.days}}</td>
+          <td><i class="bi bi-clock"></i> {{course.timing}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+      </table>
 
-      </li>
-  {% endfor %}
 
 
 

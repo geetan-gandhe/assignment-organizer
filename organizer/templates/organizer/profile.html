@@ -15,13 +15,24 @@
 </dl>
 
 <h4><p class = "text-left ml-4"> Your Schedule</p></h4>
+<table class="table table-hover table-custom">
+  <thead class="bg-custom2 text-white">
+    <tr>
+      <th scope="col" class="bg-custom2">Class</th>
+      <th scope="col">Days</th>
+      <th scope="col">Timing</th>
+    </tr>
+  </thead>
 {% for course in schedule%} 
-    <li class="list-group-item">
-      <a class="btn btn-danger btn-lg" id="class" role="button" href="{% url 'organizer:detail' course %}">{{course}}</a>
-      <label for="class"><i class="bi bi-calendar"></i> {{course.days}}, <i class="bi bi-clock"></i> {{course.timing}}</label>
-    </li>
+<tbody>
+  <tr>
+    <td><a class="btn btn-danger btn-lg" id="class" role="button" href="{% url 'organizer:detail' course %}">{{course}}</a></td>
+    <td><i class="bi bi-calendar"></i> {{course.days}}</td>
+    <td><i class="bi bi-clock"></i> {{course.timing}}</td>
+  </tr>
 {% endfor %}
-</div>
+</tbody>
+</table>
 
 <br>
 <br>

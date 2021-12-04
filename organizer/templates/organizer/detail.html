@@ -58,6 +58,7 @@
     <div class="card card-body">
 {% if slug %}
 <h2>Class PDFs: <div class="mr-1 badge badge-info"> {{slug}}</div></h2>
+<p><a href="{% url 'organizer:detail' course.class_name %}" class="badge badge-secondary">See All</a></p>
 {% else %}
 <h2>Class PDFs</h2>
 {% endif %}
