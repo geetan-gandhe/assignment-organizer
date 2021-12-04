@@ -264,7 +264,8 @@ class CalendarView(generic.ListView):
         cal = Calendar(d.year, d.month)
 
         # Call the formatmonth method, which returns our calendar as a table
-        html_cal = cal.formatmonth(user=self.request.user, withyear=True)
+        if self.request.user.is_authenticated:
+            html_cal = cal.formatmonth(user=self.request.user, withyear=True)
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
