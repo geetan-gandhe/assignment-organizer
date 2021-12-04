@@ -192,20 +192,27 @@ class ReviewTest(TestCase):
 class ToDoTest(TestCase):
     def setUp(self):
         self.client = Client()
+        User = get_user_model()
+        test_user = User.objects.create(username='tester')
+        test_user.set_password('a-27')
+        test_user.save()
 
     def test_todo_create_working(self):
         test_cat = Category.objects.create(name='cat1')
-        test_todo = TodoList.objects.create(title='List1', category=test_cat)
+        user = User.objects.get(username='tester')
+        test_todo = TodoList.objects.create(title='List1', category=test_cat, user=user)
         self.assertEqual(test_todo.title, 'List1')
 
     def test_todo_create_failing(self):
         test_cat = Category.objects.create(name='cat1')
-        test_todo = TodoList.objects.create(title='List1', category=test_cat)
+        user = User.objects.get(username='tester')
+        test_todo = TodoList.objects.create(title='List1', category=test_cat, user=user)
         self.assertNotEqual(test_todo.title, 'List2')
 
     def test_todo_nonempty_title(self):
         test_cat = Category.objects.create(name='cat1')
-        TodoList.objects.create(title='title', content='alpha', category=test_cat)
+        user = User.objects.get(username='tester')
+        TodoList.objects.create(title='title', content='alpha', category=test_cat, user=user)
         test_todo = TodoList.objects.get(content='alpha')
         self.assertNotEqual(len(test_todo.title), 0)
 
@@ -215,22 +222,26 @@ class ToDoTest(TestCase):
 
     def test_todo_max(self):
         test_cat = Category.objects.create(name='cat1')
+        user = User.objects.get(username='tester')
         test_todo = TodoList.objects.create(title='title',
                                             content='text',
                                             category=test_cat,
                                             created='2020-11-22',
-                                            due_date='2020-12-04'
+                                            due_date='2020-12-04',
+                                            user=user,
                                             )
         test_max = test_todo._meta.get_field('title').max_length
         self.assertEqual(test_max, 250)
 
     def test_todo_form1(self):
         test_cat = Category.objects.create(name='cat1')
+        user = User.objects.get(username='tester')
         data = {'title': 'title',
                 'content': 'review',
                 'category': test_cat,
                 "created": "2020-11-22",
-                "due_date": "2020-12-04"
+                "due_date": "2020-12-04",
+                'user': user
                 }
         response = self.client.post('/index', data)
         post = response.get('/index', data)
@@ -274,7 +285,7 @@ class CalendarTest(TestCase):
 
     def test_calendar_http(self):
         response = self.client.get('/calendar/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_calendar_event_http(self):
         response = self.client.get('/event/new/')
