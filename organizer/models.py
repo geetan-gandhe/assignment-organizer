@@ -62,6 +62,8 @@ class TodoList(models.Model): #Todolist able name that inherits models.Model
     created = models.DateField(default=timezone.now().strftime("%Y-%m-%d")) # a date
     due_date = models.DateField(default=timezone.now().strftime("%Y-%m-%d")) # a date
     category = models.ForeignKey(Category,  on_delete=models.PROTECT, default="general") # a foreignkey
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
 class Meta:
 		ordering = ["-created"] #ordering by the created field
@@ -74,6 +76,7 @@ class Event(models.Model):
     description = models.TextField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     @property
     def get_html_url(self):
