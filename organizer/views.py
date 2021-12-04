@@ -268,19 +268,21 @@ class CalendarView(generic.ListView):
         context['next_month'] = next_month(d)
         return context
 
-
+@login_required
 def get_date(req_month):
     if req_month:
         year, month = (int(x) for x in req_month.split('-'))
         return date(year, month, day=1)
     return datetime.datetime.today()
 
+@login_required
 def prev_month(d):
     first = d.replace(day=1)
     prev_month = first - timedelta(days=1)
     month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
     return month
-
+    
+@login_required
 def next_month(d):
     days_in_month = calendar.monthrange(d.year, d.month)[1]
     last = d.replace(day=days_in_month)
