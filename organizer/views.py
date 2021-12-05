@@ -100,6 +100,19 @@ def profile_view(request):
     }
     return render(request, 'organizer/profile.html', context)
 
+
+def leave_class(request, class_name):
+    this_course = Class.objects.get(class_name=class_name)
+    if request.method == 'POST':
+        student = request.user
+        this_course.users.remove(student)
+        this_course.save()
+
+    context = {
+        "schedule": request.user.students.all()
+    }
+    return render(request, 'organizer/profile.html', context)
+
 #Sources for file upload: https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/, https://www.askpython.com/django/upload-files-to-django, https://stackoverflow.com/questions/15846120/uploading-a-file-in-django-with-modelforms
 
 def upload_file(request, class_name):

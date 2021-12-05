@@ -21,6 +21,7 @@
       <th scope="col" class="bg-custom2">Class</th>
       <th scope="col">Days</th>
       <th scope="col">Timing</th>
+      <th scope="col">Remove</th>
     </tr>
   </thead>
 {% for course in schedule%} 
@@ -29,7 +30,11 @@
     <td><a class="btn btn-danger btn-lg" id="class" role="button" href="{% url 'organizer:detail' course %}">{{course}}</a></td>
     <td><i class="bi bi-calendar"></i> {{course.days}}</td>
     <td><i class="bi bi-clock"></i> {{course.timing}}</td>
-  </tr>
+    <form action="{% url 'organizer:leave_class' course.class_name%}" method="post">
+      {% csrf_token %}
+    <td><button class="btn text-white bg-custom" id="delete" role="button" type="submit">X</i></a></td>
+    </form>
+    </tr>
 {% endfor %}
 </tbody>
 </table>
@@ -39,3 +44,4 @@
 <br>
 <br>
 <br>
+

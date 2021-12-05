@@ -24,6 +24,7 @@ urlpatterns = [
     path('reviews/', views.ReviewListView.as_view(), name='reviews'),
     path('index',views.index, name='todo'),
     path('profile',views.profile_view, name='profile'),
+    path('profile/<str:class_name>/remove',views.leave_class, name='leave_class'),
     path('classes/<str:class_name>/upload', views.upload_file, name='upload_file'),
     path('classes/<str:class_name>/join', views.join_class, name='join_class'),
     path('classes/<str:class_name>/tags/<slug:slug>', views.DetailView.tagged_detail_view, name='tagged')]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

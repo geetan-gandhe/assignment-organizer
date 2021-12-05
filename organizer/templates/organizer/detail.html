@@ -90,10 +90,11 @@
 
 {% else %}
 
-<p>You are not a currently a student in this class.</p>
+<br>
+<p class= "ml-4">You are not a currently a student in this class.</p>
 <form action="{% url 'organizer:join_class' course.class_name%}" method="post">
 {% csrf_token %}
-<button class="btn btn-primary" type="submit">Join Class</button>
+<button class="btn btn-custom5 ml-4" type="submit">Join Class</button>
 </form>
 {% endif %}
 
