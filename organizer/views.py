@@ -228,6 +228,13 @@ from django.conf import settings
 # URL: https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c
 # Software License: n/a
 
+# Title: User Registration in Django using Google OAuth
+# Author: Geoffrey Mungai
+# Date: December 18th, 2020
+# Code version: n/a
+# URL: https://www.section.io/engineering-education/django-google-oauth/
+# Software License: n/a
+
 @login_required
 def index(request): 
     todos = TodoList.objects.filter(user=request.user)
