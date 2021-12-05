@@ -168,29 +168,25 @@ from email.mime.multipart import MIMEMultipart
 from django.core.mail import send_mail
 from django.conf import settings
 
-# Create your views here.
+###https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c
 @login_required
-def index(request): #the index view
-
-    #todos = TodoList.objects.all() #quering all todos with the object manager
+def index(request): 
     todos = TodoList.objects.filter(user=request.user)
 
-    categories = Category.objects.all() #getting all categories with object manager
+    categories = Category.objects.all() 
     print(request.user.email)
     if request.user.is_authenticated:
         email= request.user.email
 
-    if request.method == "POST": #checking if the request method is a POST
-        if "taskAdd" in request.POST: #checking if there is a request to add a todo
-            title = request.POST["description"] #title
-            date = str(request.POST["date"]) #date
-
-
-            category = request.POST["category_select"] #category
-            content = title + " -- " + date + " " + category #content
+    if request.method == "POST": 
+        if "taskAdd" in request.POST: 
+            title = request.POST["description"] 
+            date = str(request.POST["date"]) 
+            category = request.POST["category_select"] 
+            content = title + " -- " + date + " " + category 
             user=request.user
             Todo = TodoList(title=title, content=content, due_date=date, category=Category.objects.get(name=category), user=user)
-            Todo.save() #saving the todo 
+            Todo.save() 
 
 
             sg = sendgrid.SendGridAPIClient(api_key=('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'))
@@ -228,17 +224,17 @@ def index(request): #the index view
             print(response.body)
             print(response.headers)
                        
-            return redirect("/index") #reloading the page
+            return redirect("/index") 
 
-        if "taskDelete" in request.POST: #checking if there is a request to delete a todo
-            checkedlist = request.POST["checkedbox"] #checked todos to be deleted
+        if "taskDelete" in request.POST:
+            checkedlist = request.POST["checkedbox"] 
             print(checkedlist)
             todo_id_f = ""
             for todo_id in checkedlist:
                 todo_id_f = todo_id_f + str(todo_id)
             print(todo_id_f, "todo")
             todo = TodoList.objects.filter(id=int(todo_id_f))
-            todo.delete() #deleting todo
+            todo.delete() 
     return render(request, "organizer/index.html", {"todos": todos, "categories":categories})
 
 ### Source: https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html
