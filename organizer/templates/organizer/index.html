@@ -52,27 +52,32 @@
                     </blockquote> 
                 </div>   
                 </div>
-
+            </form>
 
                 <div class="mb-3">
                 <h5><div class = "text-center mb-4 p-3 mb-2 btn-custom text-white"> Your Tasks</div></h5>
-
                 </div>
-                <button class="btn btn-custom5" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();">Complete Task</button>
-
+            {%if todos %}
+            <form action="" method="post">
+                {% csrf_token %} 
+                <button class="btn btn-custom5" name="taskDelete" type="submit" onclick="$('input#sublist').click();">Complete Task</button>
+            {% endif %} 
             <br>
             <br>
             <ul class="custom">
+            <li class="list-group-item">
+            <div class="form-check" >
             {% for todo in todos %} <!-- django template lang - for loop -->
-                <li class="list-group">
-                    <li class="list-group-item">
-                    <input type="checkbox" class="Checkbox" name="checkedbox" id="{{ todo.id }}" value="{{ todo.id }}">
-                    <div label for="{{ todo.id }}"><span class="complete-">{{ todo.title }}</span></label></div>
+                    <input required="required" type="radio" name="checkedbox" class="form-check-input" id="{{ todo.id }}" value="{{ todo.id }}">
+                    <div label for="{{ todo.id }}"><span class="complete-"><div class="font-weight-bold">{{ todo.title }}</div></span></label></div>
                     <div span class="category-{{ todo.category }}">{{ todo.category }}</span></div>
                     <div strong class="taskDate"><p class="text-light bg-custom2">Due Date: {{ todo.due_date }}</p></strong></div>
-                    </li>
-                </li>
             {% endfor %} 
+            </div>
+            </li>
+                
+           
+            
             </ul><!-- taskList -->
             </form>
             </div><!-- content -->
