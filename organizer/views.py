@@ -185,8 +185,8 @@ def index(request):
             date = str(request.POST["date"]) 
             classSection=request.POST['classSection']
             category = request.POST["category_select"] 
-            content = title + " -- " + classSection + " "+ date + " " + category 
-            Todo = TodoList(title=title, content=content, due_date=date, category=Category.objects.get(name=category))
+            content = title + " -- "+ date +  + classSection + " " + category 
+            Todo = TodoList(title=title, content=content, due_date=date, classSection=classSection, category=Category.objects.get(name=category))
             Todo.save() #saving the todo 
 
             ###https://docs.sendgrid.com/for-developers/sending-email/personalizations
