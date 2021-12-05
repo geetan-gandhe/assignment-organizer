@@ -168,9 +168,10 @@ from email.mime.multipart import MIMEMultipart
 from django.core.mail import send_mail
 from django.conf import settings
 
-# Create your views here.
+###https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c
+
 @login_required
-def index(request): #the index view
+def index(request): 
 
     #todos = TodoList.objects.all() #quering all todos with the object manager
     todos = TodoList.objects.filter(user=request.user)
@@ -192,6 +193,7 @@ def index(request): #the index view
             Todo = TodoList(title=title, content=content, due_date=date, category=Category.objects.get(name=category), user=user)
             Todo.save() #saving the todo 
 
+            ###https://docs.sendgrid.com/for-developers/sending-email/personalizations
 
             sg = sendgrid.SendGridAPIClient(api_key=('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'))
             data = {
@@ -205,6 +207,7 @@ def index(request): #the index view
                 "subject": "You have a new task!",
                 "substitutions": {
                     "-title-": title,
+                    "-class-":classSection,
                     "-cat-": category,
                     "-date-":date,
                                 },
@@ -216,7 +219,7 @@ def index(request): #the index view
             "content": [
                 {
                 "type": "text/html",
-                'value':  "<html>\n  <head></head>\n  <body>\n    <p>Hello! You have a new task.\n </p> <p>Good job staying organized! The details of your new task are below:\n</p>    <p> Title: -title-\n</p> <p>Category: -cat- \n</p> <p> Date: -date-\n</p>\n <p>Your Assignment Organizer,</p> <p> Group A27 </p> </body>\n</html>"
+                'value':  "<html>\n  <head></head>\n  <body>\n    <p>Hello! You have a new task.\n </p> <p>Good job staying organized! The details of your new task are below:\n</p>    <p> Title: -title-\n</p>  <p> Class: -class-\n</p> <p>Category: -cat- \n</p> <p> Date: -date-\n</p>\n <p>Your Assignment Organizer,</p> <p> Group A27 </p> </body>\n</html>"
                           },
                 
                         ]
@@ -230,16 +233,16 @@ def index(request): #the index view
                        
             return redirect("/index") #reloading the page
 
-        if "taskDelete" in request.POST: #checking if there is a request to delete a todo
-            checkedlist = request.POST["checkedbox"] #checked todos to be deleted
+        if "taskDelete" in request.POST: 
+            checkedlist = request.POST["checkedbox"]
             print(checkedlist)
             todo_id_f = ""
             for todo_id in checkedlist:
                 todo_id_f = todo_id_f + str(todo_id)
             print(todo_id_f, "todo")
             todo = TodoList.objects.filter(id=int(todo_id_f))
-            todo.delete() #deleting todo
-    return render(request, "organizer/index.html", {"todos": todos, "categories":categories})
+            todo.delete()
+    return render(request, "organizer/index.html", {"todoLists": todoLists, "categories":categories})
 
 ### Source: https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html
 

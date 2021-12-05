@@ -66,9 +66,9 @@ class TodoList(models.Model): #Todolist able name that inherits models.Model
 
 
 class Meta:
-		ordering = ["-created"] #ordering by the created field
+		ordering = ["-created"] 
 def __str__(self):
-		return self.title #name to be shown when called
+		return self.title 
 
 ### Source: https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html
 class Event(models.Model):
