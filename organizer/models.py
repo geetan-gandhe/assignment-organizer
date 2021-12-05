@@ -23,9 +23,9 @@ class Class(models.Model):
 
       
 class Reviews(models.Model):
-    class_Instructor = models.CharField(max_length=100, default="Class Instructor")
-    review = models.TextField(max_length=100, default="Great class!")
-    course = models.ForeignKey(Class, related_name='reviews_set', on_delete=models.CASCADE, blank=True, null=True)
+    class_Instructor = models.CharField(max_length=100, default="Class Instructor", blank=False)
+    review = models.TextField(max_length=100, default="Great class!", blank=False)
+    course = models.ForeignKey(Class, related_name='reviews_set', on_delete=models.CASCADE, blank=False, null=True)
 
     def __str__(self):
         return str(self.course)
