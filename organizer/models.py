@@ -44,25 +44,24 @@ class Notes(models.Model):
 
 
 
-# Create your models here.
-class Category(models.Model): # The Category table name that inherits models.Model
-	name = models.CharField(max_length=100) #Like a varchar
-
+##https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c
+class Category(models.Model): 
+	name = models.CharField(max_length=100) 
 	class Meta:
 		verbose_name = ("Category")
 		verbose_name_plural = ("Categories")
 
 	def __str__(self):
-		return self.name #name to be shown when called
+		return self.name 
 
-class TodoList(models.Model): #Todolist able name that inherits models.Model
-    title = models.CharField(max_length=250) # a varchar
-    email = models.CharField(max_length=250,default="someone@gmail.com") # a varchar
-    content = models.TextField(blank=True) # a text field 
-    created = models.DateField(default=timezone.now().strftime("%Y-%m-%d")) # a date
-    due_date = models.DateField(default=timezone.now().strftime("%Y-%m-%d")) # a date
-    category = models.ForeignKey(Category,  on_delete=models.PROTECT, default="general") # a foreignkey
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class TodoList(models.Model): 
+    title = models.CharField(max_length=300) 
+    email = models.CharField(max_length=250,default="someone@gmail.com")
+    category = models.ForeignKey(Category,  on_delete=models.PROTECT, default="general") 
+    classSection=models.CharField(max_length=200,default="No Class")
+    content = models.TextField(blank=True) 
+    created = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))
+    due_date = models.DateField(default=timezone.now().strftime("%Y-%m-%d")) 
 
 
 class Meta:

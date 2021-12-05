@@ -173,25 +173,22 @@ from django.conf import settings
 @login_required
 def index(request): 
 
-    #todos = TodoList.objects.all() #quering all todos with the object manager
-    todos = TodoList.objects.filter(user=request.user)
-
-    categories = Category.objects.all() #getting all categories with object manager
+    ###https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c
+    todoLists = TodoList.objects.all()
+    categories = Category.objects.all() 
     print(request.user.email)
     if request.user.is_authenticated:
         email= request.user.email
 
-    if request.method == "POST": #checking if the request method is a POST
-        if "taskAdd" in request.POST: #checking if there is a request to add a todo
-            title = request.POST["description"] #title
-            date = str(request.POST["date"]) #date
-
-
-            category = request.POST["category_select"] #category
-            content = title + " -- " + date + " " + category #content
-            user=request.user
-            Todo = TodoList(title=title, content=content, due_date=date, category=Category.objects.get(name=category), user=user)
-            Todo.save() #saving the todo 
+    if request.method == "POST": 
+        if "taskAdd" in request.POST: 
+            title = request.POST["description"]
+            date = str(request.POST["date"]) 
+            classSection=request.POST['classSection']
+            category = request.POST["category_select"] 
+            content = title + " -- "+ date +" " + classSection + " " + category 
+            Todo = TodoList(title=title, email=email,category=Category.objects.get(name=category), classSection=classSection,content=content, due_date=date,  )
+            Todo.save() 
 
             ###https://docs.sendgrid.com/for-developers/sending-email/personalizations
 
@@ -229,10 +226,9 @@ def index(request):
             response = sg.client.mail.send.post(request_body=data)
             print(response.status_code)
             print(response.body)
-            print(response.headers)
-                       
-            return redirect("/index") #reloading the page
-
+            print(response.headers)   
+            return redirect("/index")
+        
         if "taskDelete" in request.POST: 
             checkedlist = request.POST["checkedbox"]
             print(checkedlist)
