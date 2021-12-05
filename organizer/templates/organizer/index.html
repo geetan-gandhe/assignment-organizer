@@ -38,6 +38,13 @@
                     </blockquote> 
                 </div>
 
+                <div class="inputContainer">
+                    <blockquote class="blockquote text-left">
+                        <label for="classSection">Class:      </label>
+                        <input style="margin-left:20px" type="text" id="classSection" class="taskName" placeholder="Enter your class here" name="classSection" required>
+                    </blockquote>    
+                    </div>
+
                 <div class="inputContainer half last">
                     <blockquote class="blockquote text-left">
                     <label for="dueDate">Due Date:</label>
@@ -69,6 +76,7 @@
                     <input type="checkbox" class="Checkbox" name="checkedbox" id="{{ todo.id }}" value="{{ todo.id }}">
                     <div label for="{{ todo.id }}"><span class="complete-">{{ todo.title }}</span></label></div>
                     <div span class="category-{{ todo.category }}">{{ todo.category }}</span></div>
+                    <div span class="classSection-{{ todo.classSection }}">{{ todo.classSection }}</span></div>
                     <div strong class="taskDate"><p class="text-light bg-primary">Due Date: {{ todo.due_date }}</p></strong></div>
                     </li>
                 </li>

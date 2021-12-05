@@ -173,7 +173,7 @@ DEFAULT_FROM_EMAIL = 'williamsgchenelle@gmail.com'
 
 
 #oiqnqjanlnculncw
-SITE_ID = 3 #ID is 3 on prod! make sure to change before commits (4 for Chenelle's local)
+SITE_ID = 4 #ID is 3 on prod! make sure to change before commits (4 for Chenelle's local)
 
 LOGIN_REDIRECT_URL = '/organizer/home/'
 LOGOUT_REDIRECT_URL = '/organizer/home/'
