@@ -32,7 +32,7 @@ Sources Used
 * 
 * Title: How to add tags to your models in Django
 * Author: Hackernoon
-* Date: December 14th 2019
+* Date: December 14th, 2019
 * Code version: n/a
 * URL: https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf
 * Software License: BSD-3
@@ -46,7 +46,7 @@ Sources Used
 * 
 * Title: How to create a calendar using django
 * Author: Hui Wen
-* Date: 24 July 2018
+* Date: July 24th, 2018
 * Code version: n/a
 * URL: https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf
 * Software License: BSD-3 
@@ -57,7 +57,14 @@ Sources Used
 * Code version: n/a
 * URL: https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
 * Software License: BSD-3
-* 
+*
+* Title: User Registration in Django using Google OAuth
+* Author: Geoffrey Mungai
+* Date: December 18th, 2020
+* Code version: n/a
+* URL: https://www.section.io/engineering-education/django-google-oauth/
+* Software License: n/a
+*
 * Title: Uploading A file in django with ModelForms
 * Author: n/a
 * Date: 2013
