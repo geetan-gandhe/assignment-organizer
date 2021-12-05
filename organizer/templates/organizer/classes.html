@@ -14,9 +14,13 @@
   <br>
 <ul>
 {% csrf_token %}
-{% for element in classes_list %}
-  <a class="btn btn-danger btn-lg" role="button" href="{% url 'organizer:detail' element.class_name %}">{{element.class_name}}</a>
-{% endfor %}
+<div class="d-flex align-content-start flex-wrap pb-3">
+  {% for element in classes_list %}
+  <a class="btn btn-danger btn-lg m-2" role="button" href="{% url 'organizer:detail' element.class_name %}">{{element.class_name}}</a>
+  {% endfor %}
+
+</div>
+
 </ul>
 
 
