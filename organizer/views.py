@@ -61,8 +61,27 @@ class ClassListView(generic.ListView):
     def get_queryset(self):
         return Class.objects.all().values('class_name')
 
-#Sources for tags: https://django-taggit.readthedocs.io/en/latest/, https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf, https://aymane-talibi-at.medium.com/how-to-add-tags-in-django-19090e8d05d3
+## REFERENCES
+# Title: Django-taggit
+# Author: Alex Gaynor and individual contributors
+# Date: n/a
+# Code version: Revision 12b899ed.
+# URL: https://django-taggit.readthedocs.io/en/latest/
+# Software License: BSD-3
 
+# Title: How to add tags in Django
+# Author:Aymane Talibi
+# Date: September 16th, 2020
+# Code version: n/a
+# URL: https://aymane-talibi-at.medium.com/how-to-add-tags-in-django-19090e8d05d3
+# Software License: n/a
+
+# Title: How to add tags to your models in Django
+# Author: Hackernoon
+# Date: December 14th 2019
+# Code version: n/a
+# URL: https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf
+# Software License: BSD-3
 
 class DetailView(View):
     def custom_detail_view(request, class_name):
@@ -113,7 +132,27 @@ def leave_class(request, class_name):
     }
     return render(request, 'organizer/profile.html', context)
 
-#Sources for file upload: https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/, https://www.askpython.com/django/upload-files-to-django, https://stackoverflow.com/questions/15846120/uploading-a-file-in-django-with-modelforms
+## REFERENCES
+# Title: File uploads
+# Author: django documentations
+# Date: n/a
+# Code version: n/a
+# URL: https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/
+# Software License: BSD-3
+
+# Title: File Uploads to Django
+# Author: AskPython
+# Date: n/a
+# Code version: n/a
+# URL: https://www.askpython.com/django/upload-files-to-django
+# Software License: n/a
+
+# Title: Uploading A file in django with ModelForms
+# Author: n/a
+# Date: 2013
+# Code version: n/a
+# URL: https://stackoverflow.com/questions/15846120/uploading-a-file-in-django-with-modelforms
+# Software License: n/a
 
 def upload_file(request, class_name):
     this_course = Class.objects.get(class_name=class_name)
@@ -181,7 +220,14 @@ from email.mime.multipart import MIMEMultipart
 from django.core.mail import send_mail
 from django.conf import settings
 
-###https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c
+## REFERENCES
+# Title: How to Build a TodoApp with Django
+# Author: Oyetoke Tobi Emmanuel
+# Date: April 23rd, 2018
+# Code version: n/a
+# URL: https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c
+# Software License: n/a
+
 @login_required
 def index(request): 
     todos = TodoList.objects.filter(user=request.user)
@@ -250,7 +296,13 @@ def index(request):
             todo.delete() 
     return render(request, "organizer/index.html", {"todos": todos, "categories":categories})
 
-### Source: https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html
+## REFERENCES
+# Title: How to create a calendar using django
+# Author: Hui Wen
+# Date: 24 July 2018
+# Code version: n/a
+# URL: https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf
+# Software License: BSD-3
 
 class CalendarView(generic.ListView):
     model = Event()

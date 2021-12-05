@@ -8,6 +8,49 @@ from django.utils import timezone
 from taggit.managers import TaggableManager
 
 
+## REFERENCES
+# Title: File uploads
+# Author: django documentations
+# Date: n/a
+# Code version: n/a
+# URL: https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/
+# Software License: BSD-3
+
+# Title: File Uploads to Django
+# Author: AskPython
+# Date: n/a
+# Code version: n/a
+# URL: https://www.askpython.com/django/upload-files-to-django
+# Software License: n/a
+
+# Title: Uploading A file in django with ModelForms
+# Author: n/a
+# Date: 2013
+# Code version: n/a
+# URL: https://stackoverflow.com/questions/15846120/uploading-a-file-in-django-with-modelforms
+# Software License: n/a
+
+# Title: Django-taggit
+# Author: Alex Gaynor and individual contributors
+# Date: n/a
+# Code version: Revision 12b899ed.
+# URL: https://django-taggit.readthedocs.io/en/latest/
+# Software License: BSD-3
+
+# Title: How to add tags in Django
+# Author:Aymane Talibi
+# Date: September 16th, 2020
+# Code version: n/a
+# URL: https://aymane-talibi-at.medium.com/how-to-add-tags-in-django-19090e8d05d3
+# Software License: n/a
+
+# Title: How to add tags to your models in Django
+# Author: Hackernoon
+# Date: December 14th 2019
+# Code version: n/a
+# URL: https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf
+# Software License: BSD-3
+
 class Class(models.Model):
     class_name = models.CharField(max_length=100, default="CS3240")
     users = models.ManyToManyField(User, related_name="students")
@@ -30,9 +73,6 @@ class Reviews(models.Model):
     def __str__(self):
         return str(self.course)
 
-#Sources for file upload: https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/, https://www.askpython.com/django/upload-files-to-django, https://stackoverflow.com/questions/15846120/uploading-a-file-in-django-with-modelforms
-#Sources for tags: https://django-taggit.readthedocs.io/en/latest/, https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf, https://aymane-talibi-at.medium.com/how-to-add-tags-in-django-19090e8d05d3
-
 class Notes(models.Model):
     file = models.FileField(upload_to='media/')
     course = models.ForeignKey(Class, related_name='notes_set', on_delete=models.CASCADE) 
@@ -42,9 +82,14 @@ class Notes(models.Model):
     tags = TaggableManager()
 
 
+## REFERENCES
+# Title: How to Build a TodoApp with Django
+# Author: Oyetoke Tobi Emmanuel
+# Date: April 23rd, 2018
+# Code version: n/a
+# URL: https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c
+# Software License: n/a
 
-
-###https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c
 class Category(models.Model): 
 	name = models.CharField(max_length=150) 
 

@@ -2,7 +2,13 @@ from datetime import datetime, timedelta
 from calendar import HTMLCalendar
 from .models import Event
 
-### Citations: https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html
+## REFERENCES
+# Title: How to create a calendar using django
+# Author: Hui Wen
+# Date: 24 July 2018
+# Code version: n/a
+# URL: https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf
+# Software License: BSD-3
 
 class Calendar(HTMLCalendar):
 	def __init__(self, year=None, month=None):

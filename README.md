@@ -36,6 +36,13 @@ Sources Used
 * Code version: n/a
 * URL: https://hackernoon.com/how-to-add-tags-to-your-models-in-django-django-packages-series-1-4y1b32sf
 * Software License: BSD-3
+*
+* Title: How to Build a TodoApp with Django
+* Author: Oyetoke Tobi Emmanuel
+* Date: April 23rd, 2018
+* Code version: n/a
+* URL: https://medium.com/fbdevclagos/how-to-build-a-todo-app-with-django-17afdc4a8f8c
+* Software License: n/a
 * 
 * Title: How to create a calendar using django
 * Author: Hui Wen
