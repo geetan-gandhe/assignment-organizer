@@ -295,11 +295,22 @@ def event(request, event_id=None):
     else:
         instance = Event()
     form = EventForm(request.POST or None, instance=instance)
-    if request.POST and form.is_valid():
-        object = form.save(commit=False)
-        object.user = request.user
-        object.save()
-        return HttpResponseRedirect(reverse('organizer:calendar'))
+    if request.POST:  
+        print("here1")
+        if "submit" in request.POST and form.is_valid():
+            object = form.save(commit=False)
+            object.user = request.user
+            object.save()
+            return HttpResponseRedirect(reverse('organizer:calendar'))
+        elif "delete" in request.POST:
+            print("here")
+            if event_id:
+                to_delete = Event.objects.filter(id=event_id)
+                to_delete.delete()
+            return HttpResponseRedirect(reverse('organizer:calendar'))
+        else:
+            return HttpResponseRedirect(reverse('organizer:calendar'))
     return render(request, 'organizer/event.html', {'form': form})
+
 
 
